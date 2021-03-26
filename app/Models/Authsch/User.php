@@ -18,13 +18,8 @@ class User extends Authenticatable
     protected $fillable = [
         'id',
         'displayName',
-        'sn',
-        'givenName',
         'mail',
-        'mobile',
         'bmeunitscope',
-        'permanentaddress',
-        'birthdate',
     ];
 
     public function get_ad_memberships()

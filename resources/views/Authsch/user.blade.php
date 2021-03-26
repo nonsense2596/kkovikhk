@@ -13,11 +13,10 @@
 </head>
 
     <h1>Basic information</h1>
+    <p>ID: {{$user->id}}</p>
     <p>Name: {{$user->displayName}}</p>
     <p>Mail: {{$user->mail}}</p>
     <p>BME status: {{$user->bmeunitscope}}</p>
-    <p>Address: {{$user->permanentaddress}}</p>
-    <p>Date of birth: {{$user->birthdate}}</p>
 </body>
 </html>
 
