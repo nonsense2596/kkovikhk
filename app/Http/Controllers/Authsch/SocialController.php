@@ -4,13 +4,7 @@ namespace App\Http\Controllers\Authsch;
 
 
 use Illuminate\Http\Request;
-
-use App\Models\Authsch\AdMemberships;
 use App\Models\Authsch\User;
-use App\Models\Authsch\AttendedCourses;
-use App\Models\Authsch\LinkedAccounts;
-use App\Models\Authsch\StudentClubMemberships;
-use App\Models\Authsch\Entrants;
 use Validator;
 use Socialite;
 use Exception;
@@ -47,82 +41,6 @@ class SocialController extends Controller
                 'birthdate' => $user->birthdate,
             ]);
 
-            // ------====== LINKED ACCOUNTS ======------
-            if(!is_null($user->linkedAccounts))
-            {
-                foreach($user->linkedAccounts as $key => $value)
-                {
-                    $linked_account = LinkedAccounts::create([
-                        'user_id' => $user->id,
-                        'account_type' => $key,
-                        'account_name' => $value
-                    ]);
-                    $linked_account->save();
-                }
-            }
-
-            // ------====== CLUB MEMBERSHIPS ON PEK ======------
-            if(!is_null($user->eduPersonEntitlement))
-            {
-                foreach($user->eduPersonEntitlement as $key => $value)
-                {
-                    //ddd($value["end"]);
-                    $student_club_membership = StudentClubMemberships::create([
-                        'user_id' => $user->id,
-                        'club_id' => $value["id"],
-                        'club_name' => $value["name"],
-                        'title' => isset($value["title"]) ? implode(";",$value["title"]) : null,    // meg nem a legszebb
-                        'status' => $value["status"],
-                        'start' => $value["start"],
-                        'end' => $value["end"]
-                    ]);
-                    $student_club_membership->save();
-                }
-            }
-
-            // ------====== CURRENTLY (NOT ALWAYS UP TO DATE) LIST OF ATTENDED COURSES ======------
-            if(!is_null($user->niifEduPersonAttendedCourse))
-            {
-                $exploded = explode(";",$user->niifEduPersonAttendedCourse);
-                foreach($exploded as $value)
-                {
-                    $attended_course = AttendedCourses::create([
-                        'user_id' => $user->id,
-                        'course' => $value
-                    ]);
-                    $attended_course->save();
-                }
-            }
-
-            // ------====== DORM ENTRY CARD RANK ======------
-            if(!is_null($user->entrants))
-            {
-                foreach($user->entrants as $value)
-                {
-                    $entrant = Entrants::create([
-                        'user_id' => $user->id,
-                        'group_id' => $value["groupId"],
-                        'group_name' => $value["groupName"],
-                        "entrant_type" => $value["entrantType"]
-                    ]);
-                    $entrant->save();
-                }
-            }
-
-            // ------====== SCH ACTIVE DIRECTORY MEMBERSHIPS ======------
-            if(!is_null($user->admembership))
-            {
-                foreach($user->admembership as $value)
-                {
-                    $admembership = AdMemberships::create([
-                        'user_id' => $user->id,
-                        'membership' => $value
-                    ]);
-                    $admembership->save();
-                }
-            }
-
-
             $authuser->save();
         }
 
@@ -132,7 +50,7 @@ class SocialController extends Controller
     }
 
 
-    public function logOutOfSchonFuckingHerz()
+    public function logoutOfSchonherz()
     {
         Auth::logout();
         return redirect('/');
