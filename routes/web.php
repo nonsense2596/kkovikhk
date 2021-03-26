@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Authsch\UserController;
+use App\Http\Controllers\Authsch\SocialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['middleware' => 'web'], function (){
+    Route::get('/user',[UserController::class,'index'])->middleware('auth');
+});
+
+Route::get('/auth/schonherz', [SocialController::class, 'schonherzRedirect'])->name('login');
+Route::get('/auth/schonherz/callback', [SocialController::class, 'loginWithSchonherz']);
+Route::get('/auth/schonherz/logout',[SocialController::class, 'logOutOfSchonFuckingHerz']);
