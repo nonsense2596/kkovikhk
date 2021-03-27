@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Authsch\UserController;
 use App\Http\Controllers\Authsch\SocialController;
+use App\Http\Controllers\IndexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +16,7 @@ use App\Http\Controllers\Authsch\SocialController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [IndexController::class,'index']);
 
 Route::group(['middleware' => 'web'], function (){
     Route::get('/user',[UserController::class,'index'])->middleware('auth');

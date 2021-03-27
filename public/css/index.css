@@ -1,0 +1,64 @@
+html,
+body {
+    height: 100%;
+}
+
+#bgimg {
+    background-image: url('/imgs/qep.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.v-center {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.img {
+    width: 100%;
+}
+
+.hklogo {
+    width: 95px;
+    height: 135px;
+    background-image:url('/imgs/hkf.png');
+    background-size: contain;
+    border: 0px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.forgotpass {
+    text-decoration: underline;
+}
+
+.form-bottom .form-bottom-left {
+    float: left;
+}
+
+.form-bottom .form-bottom-right {
+    float: right;
+}
+
+@media only screen and (max-width: 991px) {
+    #bgimg {
+        display: none;
+    }
+}
+
+#bgimg {
+    overflow: hidden;
+}
+
+.bg {
+    position: absolute;
+    opacity: 0.0;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    width: 2000px;
+    height: 2000px;
+    background-image: url("/imgs/img1.svg");
+    background-repeat: repeat;
+}

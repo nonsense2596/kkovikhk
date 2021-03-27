@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1399.7 1351.42">
+  <defs>
+    <style>.cls-1{fill:none;stroke:#fff;stroke-width:4.66px;}</style>
+  </defs>
+  <title>Asset 3</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <line class="cls-1" x1="1087.57" y1="4.66" x2="932.68" y2="272.93"></line>
+      <line class="cls-1" x1="467.7" y1="4.66" x2="622.59" y2="272.93"></line>
+      <line class="cls-1" x1="1397.68" y1="541.36" x2="932.7" y2="1346.76"></line>
+      <polyline class="cls-1" points="157.58 1078.06 2.8 809.98 157.7 541.36"></polyline>
+      <line class="cls-1" x1="1397.68" y1="1078.3" x2="777.68" y2="4.43"></line>
+      <polyline class="cls-1" points="1397.68 4.43 622.7 1346.76 2.69 272.93 157.58 4.66 622.71 809.85 777.68 541.36 932.7 809.82"></polyline>
+      <line class="cls-1" x1="777.56" y1="4.66" x2="2.71" y2="1346.76"></line>
+    </g>
+  </g>
+</svg>
