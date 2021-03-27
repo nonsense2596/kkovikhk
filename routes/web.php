@@ -20,8 +20,9 @@ Route::get('/', [IndexController::class,'index']);
 
 Route::group(['middleware' => 'web'], function (){
     Route::get('/user',[UserController::class,'index'])->middleware('auth');
+    Route::get('/voteselect',   [IndexController::class,'voteselect']);
 });
 
 Route::get('/auth/schonherz', [SocialController::class, 'schonherzRedirect'])->name('login');
 Route::get('/auth/schonherz/callback', [SocialController::class, 'loginWithSchonherz']);
-Route::get('/auth/schonherz/logout',[SocialController::class, 'logOutOfSchonFuckingHerz']);
+Route::get('/auth/schonherz/logout',[SocialController::class, 'logOutOfSchonherz']);

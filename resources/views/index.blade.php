@@ -24,11 +24,17 @@
                     <br><br>
                     <div class="row">
                         <div class="col-lg-12 col-12">
-                            <a href="{{ url('auth/schonherz') }}" class="btn btn-primary col-lg-12 col-12">Authsch bejelentkezés</a>
+                            @auth
+                                <h5>Már be vagy jelentkezve</h5>
+                                <br>
+                                <a href="{{ url('/voteselect') }}" class="btn btn-primary col-lg-12 col-12">Tovább a szavazáshoz</a>
+                            @endauth
+                            @guest
+                                <a href="{{ url('auth/schonherz') }}" class="btn btn-primary col-lg-12 col-12">Authsch bejelentkezés</a>
+                            @endguest
                         </div>
                     </div>
                     <br><br>
-                    @auth<h5>Logged in</h5>@endauth
                 </div>
             </div>
         </div>

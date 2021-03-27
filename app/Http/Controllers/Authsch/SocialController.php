@@ -46,7 +46,7 @@ class SocialController extends Controller
 
         Auth::login($authuser);
 
-        return redirect()->intended();
+        return redirect('/voteselect');
     }
 
 

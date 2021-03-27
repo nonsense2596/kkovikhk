@@ -8,7 +8,12 @@ use App\Http\Controllers\Controller as Controller;
 
 class IndexController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view("index");
+    }
+    public function voteselect()
+    {
+        return view("voteselect");
     }
 }
