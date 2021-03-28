@@ -17,6 +17,7 @@
     <p>Name: {{$user->displayName}}</p>
     <p>Mail: {{$user->mail}}</p>
     <p>BME status: {{$user->bmeunitscope}}</p>
+    <p>IP: {{$ip}}</p>
 </body>
 </html>
 

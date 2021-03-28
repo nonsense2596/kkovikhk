@@ -32,13 +32,8 @@ class SocialController extends Controller
             $authuser = User::create([
                 'id' => $user->id,
                 'displayName' => $user->displayName,
-                'sn' => $user->sn,
-                'givenName' => $user->givenName,
                 'mail' =>$user->mail,
-                'mobile' => $user->mobile,
                 'bmeunitscope' => self::get_unit_scope($user->bmeunitscope),
-                'permanentaddress' => $user->permanentaddress,
-                'birthdate' => $user->birthdate,
             ]);
 
             $authuser->save();

@@ -16,12 +16,28 @@
     </div>
     </div>
     <div class="own-container h-100">
-        <div class="img-box" style="background-image: url('/imgs/2c.jpg');">
-            <div class="img-title">Kar Kiváló Oktatója</div>
-        </div>
-        <div class="img-box" style="background-image: url('/imgs/4c.jpg');">
-            <div class="img-title">Kar Kiváló Fiatal Oktatója</div>
-        </div>
+        <a class="img-box" id="img-left" href="{{url('/vote')}}">
+            <div class="img-title">
+                Kar Kiváló Oktatója
+                <br>
+                @if(true)
+                    <span class="alreadyvoted">
+                        (már szavaztál)
+                    </span>
+                @endif
+            </div>
+        </a>
+        <a class="img-box" id="img-right" href="{{url('/voteyoung')}}">
+            <div class="img-title">
+                Kar Kiváló Fiatal Oktatója
+                <br>
+                @if(true)
+                    <span class="alreadyvoted">
+                        (már szavaztál)
+                    </span>
+                @endif
+            </div>
+        </a>
     </div>
 
     <script src="jquery-1.7.2.js"></script>

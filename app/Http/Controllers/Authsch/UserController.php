@@ -18,7 +18,9 @@ class UserController extends Controller
 {
     public function index(){
         $user = Auth::user();
+        $ip = $_SERVER['REMOTE_ADDR'];
 
-        return view('authsch.user',compact('user'));
+        return view('user',compact('user','ip'));
     }
+
 }

@@ -22,25 +22,4 @@ class User extends Authenticatable
         'bmeunitscope',
     ];
 
-    public function get_ad_memberships()
-    {
-        return $this->hasMany(AdMemberships::class);
-    }
-    public function get_attended_courses()
-    {
-        return $this->hasMany(AttendedCourses::class);
-    }
-    public function get_entrants()
-    {
-        return $this->hasMany(Entrants::class);
-    }
-    public function get_linked_accounts()
-    {
-        return $this->hasMany(LinkedAccounts::class);
-    }
-    public function get_student_club_memberships()
-    {
-        return $this->hasMany(StudentClubMemberships::class);
-    }
-
 }
