@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Authsch\UserController;
 use App\Http\Controllers\Authsch\SocialController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\VoteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,10 @@ Route::get('/', [IndexController::class,'index']);
 
 Route::group(['middleware' => 'web'], function (){
     Route::get('/user',[UserController::class,'index'])->middleware('auth');
-    Route::get('/voteselect',   [IndexController::class,'voteselect']);
+    Route::get('/voteselect', [IndexController::class,'voteselect']);
+    Route::get('/vote', [VoteController::class, 'vote']);
+    Route::get('/youngvote', [VoteController::class, 'youngvote']);
+    Route::post('/vote', [VoteController::class, 'votepost']);
 });
 
 Route::get('/auth/schonherz', [SocialController::class, 'schonherzRedirect'])->name('login');

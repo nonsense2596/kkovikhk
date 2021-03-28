@@ -27,7 +27,7 @@
                 @endif
             </div>
         </a>
-        <a class="img-box" id="img-right" href="{{url('/voteyoung')}}">
+        <a class="img-box" id="img-right" href="{{url('/youngvote')}}">
             <div class="img-title">
                 Kar Kiváló Fiatal Oktatója
                 <br>
