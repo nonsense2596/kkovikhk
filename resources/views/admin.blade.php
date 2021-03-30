@@ -31,11 +31,12 @@
         </div>
         <hr>
         <div class="row">
-            <div class="form-inline mb-2">
-                <input type="text" class="form-control mr-2" id="inputPassword2" size="15" placeholder="Akari Saito">
-                <input type="text" class="form-control mr-2" id="inputPassword2" size="70" placeholder="For being the best catgirl in the world <3">
-                <button type="submit" class="btn btn-success mr-2">A</button>
-            </div>
+            <form class="form-inline mb-2" method="POST" action="/addteacher" id="addteacher">
+                @csrf
+                <input type="text" class="form-control mr-2" id="inputPassword2" size="15" placeholder="Akari Saito" name="teachername">
+                <input type="text" class="form-control mr-2" id="inputPassword2" size="70" placeholder="For being the best catgirl in the world <3" name="teacherdescription">
+                <button type="submit" class="btn btn-success mr-2" form="addteacher" value="Submit">A</button>
+            </form>
         </div>
     </div>
 </div>
@@ -51,7 +52,7 @@
             url: '/deleteteacher',
             success: function(result){
                 console.log("siker mara, go to jatszani");
-                //window.location.reload();
+                window.location.reload();
             },
             error: function(result){
                 console.log("work is da poop, no more");

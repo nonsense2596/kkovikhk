@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
+    // todo gates to global function
     public function admin()
     {
         if(!Gate::allows('admin')){
@@ -38,5 +39,20 @@ class AdminController extends Controller
         $teacher->delete();
 
         //Teacher::delete();
+    }
+    // todo inspect this shit
+    public function addteacher()
+    {
+        if(!Gate::allows('admin')){
+            abort(403);
+        }
+        $request = request();
+        //dd($teacher->teachername);
+        $teacher = new Teacher([
+            'name' => $request->teachername,
+            'description' => $request->teacherdescription,
+        ]);
+        $teacher->save();
+        return redirect('/admin');
     }
 }
