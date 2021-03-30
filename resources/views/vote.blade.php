@@ -23,10 +23,11 @@
         </div>
 
         <div class="row">
-            <form method="POST" action="/votepost" id="form1">
+            <form method="POST" action="/vote" id="form1">
+                @csrf
                 @foreach($teachers as $teacher)
                     <label>
-                        <input type="radio" name="organization" class="card-input-element d-none" id="demo">
+                        <input type="radio" name="name" class="card-input-element d-none" value="{{$teacher->id}}">
                         <div class="card d-flex flex-row justify-content-between">
                             <div class="card-body my-card-header">
                                 {{$teacher->name}}
@@ -37,7 +38,6 @@
                         </div>
                     </label>
                 @endforeach
-
             </form>
         </div>
         <div class="row">
