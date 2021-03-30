@@ -32,6 +32,9 @@
                             @guest
                                 <a href="{{ url('auth/schonherz') }}" class="btn btn-primary col-lg-12 col-12">Authsch bejelentkezés</a>
                             @endguest
+                            @if($current_user->isadmin)
+                                <a href="{{ url('/admin') }}" class="btn btn-success col-lg-12 col-12 mt-2">Admin</a>
+                            @endif
                         </div>
                     </div>
                     <br><br>

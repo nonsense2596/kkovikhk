@@ -12,6 +12,7 @@ use Auth;
 
 class VoteController extends Controller
 {
+    // TODO IMPLEMENT BACKEND CHECKS FOR THE FORM, IF NOT NULL!!!
     public function vote()
     {
         $current_user = Auth::user();
@@ -33,7 +34,7 @@ class VoteController extends Controller
         $vote = $request["name"];
         $num_of_teachers = count(Teacher::all());
 
-        if($vote<=0 || $vote>$num_of_teachers)
+        if($vote<=0 || $vote>$num_of_teachers)  // fix to if id exists
             return redirect('/vote');
 
         $new_vote = new Vote([
@@ -66,7 +67,7 @@ class VoteController extends Controller
         $vote = $request["name"];
         $num_of_teachers = count(YoungTeacher::all());
 
-        if($vote<=0 || $vote>$num_of_teachers)
+        if($vote<=0 || $vote>$num_of_teachers) // fix to if id exists
             return redirect('/vote');
 
         $new_vote = new YoungVote([

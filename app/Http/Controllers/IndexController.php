@@ -12,7 +12,8 @@ class IndexController extends Controller
 {
     public function index()
     {
-        return view("index");
+        $current_user = Auth::user();
+        return view("index",compact('current_user'));
     }
     public function voteselect()
     {

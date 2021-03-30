@@ -30,6 +30,7 @@ Route::group(['middleware' => ['web','auth']], function (){
     Route::post('/youngvote', [VoteController::class, 'youngvotepost']);
 
     Route::get('/admin', [AdminController::class, 'admin']);
+    Route::post('/deleteteacher', [AdminController::class, 'deleteteacher']);
 });
 
 Route::get('/auth/schonherz', [SocialController::class, 'schonherzRedirect'])->name('login');
