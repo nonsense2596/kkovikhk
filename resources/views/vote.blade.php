@@ -32,7 +32,7 @@
                                 {{$teacher->name}}
                             </div>
                             <div class="card-body">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vulputate eu nulla aliquet iaculis. Curabitur dictum volutpat metus, ac finibus nunc ullamcorper ut. Sed dapibus lacus eget nisi laoreet, sit amet auctor mauris maximus. Quisque ante sapien, rutrum ut porttitor eu, ornare a enim. Morbi aliquam aliquet ipsum, eu ultrices leo semper vel. Donec eu sodales lectus, vitae gravida enim. Vestibulum tristique urna neque, vel laoreet nisi finibus ac. Aliquam tempus ante augue, non ultrices purus rutrum a.
+                                {{$teacher->description}}
                             </div>
                         </div>
                     </label>

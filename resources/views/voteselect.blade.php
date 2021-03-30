@@ -20,7 +20,7 @@
             <div class="img-title">
                 Kar Kiváló Oktatója
                 <br>
-                @if(true)
+                @if($already_voted)
                     <span class="alreadyvoted">
                         (már szavaztál)
                     </span>
@@ -31,7 +31,7 @@
             <div class="img-title">
                 Kar Kiváló Fiatal Oktatója
                 <br>
-                @if(true)
+                @if($already_voted_young)
                     <span class="alreadyvoted">
                         (már szavaztál)
                     </span>
