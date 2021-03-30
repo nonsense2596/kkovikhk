@@ -5,6 +5,7 @@ use App\Http\Controllers\Authsch\UserController;
 use App\Http\Controllers\Authsch\SocialController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\VoteController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,8 @@ Route::group(['middleware' => 'web'], function (){
     Route::get('/vote', [VoteController::class, 'vote']);
     Route::get('/youngvote', [VoteController::class, 'youngvote']);
     Route::post('/vote', [VoteController::class, 'votepost']);
+
+    Route::get('/admin', [AdminController::class, 'admin']);
 });
 
 Route::get('/auth/schonherz', [SocialController::class, 'schonherzRedirect'])->name('login');

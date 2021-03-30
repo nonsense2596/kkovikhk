@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('displayName')->nullable()->default(null);
             $table->string('mail')->nullable()->default(null);
             $table->string('bmeunitscope')->nullable()->default(null);
+            $table->boolean('isadmin')->default(false);
         });
     }
 
