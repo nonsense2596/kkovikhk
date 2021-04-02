@@ -43,6 +43,7 @@ Route::group(['middleware' => ['web','auth']], function (){
         Route::post('/modifyteacheryoung',[AdminController::class, 'modifyteacheryoung']);
 
         Route::post('/setvotingperiod',[AdminController::class, 'setvotingperiod']);
+        Route::post('/endvotingperiod',[AdminController::class, 'endvotingperiod']);
     });
 
 });

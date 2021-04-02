@@ -56,6 +56,12 @@ class AdminController extends Controller
         }
         $votingperiod->save();
     }
+    public function endvotingperiod()
+    {
+        $votingperiod = VotingPeriod::where('id','>=','0')->first();
+        if($votingperiod)
+            $votingperiod->delete();
+    }
 
     public function deleteteacher()
     {

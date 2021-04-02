@@ -24,6 +24,11 @@
                         <input type="date" class="form-control mr-2" id="enddate" name="enddate" value="{{$votingperiod->end}}">
                         <button type="button" class="btn btn-success mr-2" onClick="setVotingPeriod()">S</button>
                         <button type="button" class="btn btn-danger mr-2" onClick="endVotingPeriod()">X</button>
+                        @if($votingperiod->start==null)
+                            <span>The system is <b><u>not</u></b> accepting votes</span>
+                        @else
+                            <span>The system is accepting votes between <b>{{$votingperiod->start}}</b> (0:01) and <b>{{$votingperiod->end}}</b> (23:59)</span>
+                        @endif
                     </form>
                 </div>
             </div>
@@ -75,10 +80,12 @@
                 <button type="button" class="btn btn-success mr-2" onClick="addTeacherYoung()">A</button>
             </form>
         </div>
+
     </div>
 </div>
 <script src="/js/jquery-1.7.2.js"></script>
 <script src="/js/jquery.parallax.min.js"></script>
+
 <script>
     function setVotingPeriod(){
         var startdate = document.getElementById("startdate").value;
@@ -89,6 +96,16 @@
             url: '/setvotingperiod',
             success: function(result){
                 // todo modal maybe???
+                window.location.reload();
+            }
+        });
+    }
+    function endVotingPeriod(){
+        $.ajax({
+            type: 'POST',
+            data: {_token:"{{csrf_token()}}"},
+            url: '/endvotingperiod',
+            success: function(result){
                 window.location.reload();
             }
         })
