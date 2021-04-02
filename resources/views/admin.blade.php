@@ -14,6 +14,20 @@
         <div class="row">
             <h1>Admin page</h1>
         </div>
+        <!-- VOTING PERIOD -->
+        <div class="row">
+            <div class="col-12">
+                <h3>Voting period</h3>
+                <div class="row">
+                    <form class="form-inline mb-2">
+                        <input type="date" class="form-control mr-2" id="startdate" name="startdate" value="{{$votingperiod->start}}">
+                        <input type="date" class="form-control mr-2" id="enddate" name="enddate" value="{{$votingperiod->end}}">
+                        <button type="button" class="btn btn-success mr-2" onClick="setVotingPeriod()">S</button>
+                        <button type="button" class="btn btn-danger mr-2" onClick="endVotingPeriod()">X</button>
+                    </form>
+                </div>
+            </div>
+        </div>
         <!-- TEACHER LIST -->
         <div class="row">
             <div class="col-12">
@@ -66,6 +80,20 @@
 <script src="/js/jquery-1.7.2.js"></script>
 <script src="/js/jquery.parallax.min.js"></script>
 <script>
+    function setVotingPeriod(){
+        var startdate = document.getElementById("startdate").value;
+        var enddate = document.getElementById("enddate").value;
+        $.ajax({
+            type: 'POST',
+            data: {_token:"{{csrf_token()}}", startdate, enddate},
+            url: '/setvotingperiod',
+            success: function(result){
+                // todo modal maybe???
+                window.location.reload();
+            }
+        })
+    }
+
     function modifyTeacher(param){
         var teacherid = param.dataset.index;
         var teachername = document.getElementById("name"+teacherid).value;

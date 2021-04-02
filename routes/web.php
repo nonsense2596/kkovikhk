@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Authsch\UserController;
 use App\Http\Controllers\Authsch\SocialController;
@@ -21,7 +22,7 @@ use App\Http\Controllers\AdminController;
 Route::get('/', [IndexController::class,'index']);
 
 Route::group(['middleware' => ['web','auth']], function (){
-    Route::get('/user',[UserController::class,'index'])->middleware('auth');
+    Route::get('/user',[UserController::class,'index']);//->middleware('auth');
     Route::get('/voteselect', [IndexController::class,'voteselect']);
 
     Route::get('/vote', [VoteController::class, 'vote']);
@@ -29,14 +30,21 @@ Route::group(['middleware' => ['web','auth']], function (){
     Route::get('/youngvote', [VoteController::class, 'youngvote']);
     Route::post('/youngvote', [VoteController::class, 'youngvotepost']);
 
-    Route::get('/admin', [AdminController::class, 'admin']);
-    Route::post('/deleteteacher', [AdminController::class, 'deleteteacher']);
-    Route::post('/addteacher',[AdminController::class, 'addteacher']);
-    Route::post('/modifyteacher',[AdminController::class, 'modifyteacher']);
 
-    Route::post('/addteacheryoung',[AdminController::class, 'addteacheryoung']);
-    Route::post('/deleteteacheryoung', [AdminController::class, 'deleteteacheryoung']);
-    Route::post('/modifyteacheryoung',[AdminController::class, 'modifyteacheryoung']);
+    Route::group(['middleware' => 'isadmin'],function(){
+        Route::get('/admin', [AdminController::class, 'admin']);
+
+        Route::post('/deleteteacher', [AdminController::class, 'deleteteacher']);
+        Route::post('/addteacher',[AdminController::class, 'addteacher']);
+        Route::post('/modifyteacher',[AdminController::class, 'modifyteacher']);
+
+        Route::post('/addteacheryoung',[AdminController::class, 'addteacheryoung']);
+        Route::post('/deleteteacheryoung', [AdminController::class, 'deleteteacheryoung']);
+        Route::post('/modifyteacheryoung',[AdminController::class, 'modifyteacheryoung']);
+
+        Route::post('/setvotingperiod',[AdminController::class, 'setvotingperiod']);
+    });
+
 });
 
 Route::get('/auth/schonherz', [SocialController::class, 'schonherzRedirect'])->name('login');
