@@ -13,4 +13,24 @@ class VotingPeriod extends Model
         'start',
         'end',
     ];
+
+    public static function isVotingPeriod(){
+        $votingperiod = VotingPeriod::getVotingPeriodOrInit();
+        $current_date = date('Y-m-d');
+        if($current_date >= $votingperiod->start && $current_date <= $votingperiod->end)
+            return true;
+        else return false;
+    }
+
+    public static function getVotingPeriod()
+    {
+        return VotingPeriod::where('id','>=','0')->first();
+    }
+
+    public static function getVotingPeriodOrInit()
+    {
+        $votingperiod = VotingPeriod::where('id','>=','0')->first();
+        if(!$votingperiod) $votingperiod = new VotingPeriod();
+        return $votingperiod;
+    }
 }

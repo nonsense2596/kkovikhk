@@ -13,4 +13,5 @@ class Vote extends Model
         'user_id',
         'teacher_id',
     ];
+
 }

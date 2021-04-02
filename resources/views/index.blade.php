@@ -27,7 +27,11 @@
                             @auth
                                 <h5>Már be vagy jelentkezve</h5>
                                 <br>
-                                <a href="{{ url('/voteselect') }}" class="btn btn-primary col-lg-12 col-12">Tovább a szavazáshoz</a>
+                                @if($isvotingperiod)
+                                    <a href="{{ url('/voteselect') }}" class="btn btn-primary col-lg-12 col-12">Tovább a szavazáshoz</a>
+                                @else
+                                    <a href="#" class="btn btn-secondary col-lg-12 col-12 disabled" aria-disabled="true">Jelenleg nincs szavazási időszak</a>
+                                @endif
                             @endauth
                             @guest
                                 <a href="{{ url('auth/schonherz') }}" class="btn btn-primary col-lg-12 col-12">Authsch bejelentkezés</a>

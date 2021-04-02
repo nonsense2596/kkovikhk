@@ -80,12 +80,43 @@
                 <button type="button" class="btn btn-success mr-2" onClick="addTeacherYoung()">A</button>
             </form>
         </div>
-
+        <!-- pie charts -->
+        <br>
+        <div class="row">
+            <div class="col-12">
+                <h3>Pite diagram</h3>
+                <div class="row">
+                    <div id="piechart" style="width: 900px; height: 500px;"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <script src="/js/jquery-1.7.2.js"></script>
 <script src="/js/jquery.parallax.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
 
+    function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+            ['Name', 'Vote count'],
+            @foreach($votecounts as $votecount)
+            ['{{$votecount->name}}',{{$votecount->count}}],
+            @endforeach
+        ]);
+
+        var options = {
+            title: 'Bestest Miqo\'te',
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+    }
+</script>
 <script>
     function setVotingPeriod(){
         var startdate = document.getElementById("startdate").value;

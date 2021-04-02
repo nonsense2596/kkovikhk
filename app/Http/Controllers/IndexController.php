@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\VotingPeriod;
 use Illuminate\Http\Request;
 use App\Models\User;    // talan nem kell
 use App\Http\Controllers\Controller as Controller;
@@ -13,7 +14,8 @@ class IndexController extends Controller
     public function index()
     {
         $current_user = Auth::user();
-        return view("index",compact('current_user'));
+        $isvotingperiod = VotingPeriod::isVotingPeriod();
+        return view("index",compact('current_user','isvotingperiod'));
     }
     public function voteselect()
     {

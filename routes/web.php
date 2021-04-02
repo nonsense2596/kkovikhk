@@ -23,13 +23,15 @@ Route::get('/', [IndexController::class,'index']);
 
 Route::group(['middleware' => ['web','auth']], function (){
     Route::get('/user',[UserController::class,'index']);//->middleware('auth');
-    Route::get('/voteselect', [IndexController::class,'voteselect']);
 
-    Route::get('/vote', [VoteController::class, 'vote']);
-    Route::post('/vote', [VoteController::class, 'votepost']);
-    Route::get('/youngvote', [VoteController::class, 'youngvote']);
-    Route::post('/youngvote', [VoteController::class, 'youngvotepost']);
+    Route::group(['middleware' => 'isvotingperiod'],function(){
+        Route::get('/voteselect', [IndexController::class,'voteselect']);
 
+        Route::get('/vote', [VoteController::class, 'vote']);
+        Route::post('/vote', [VoteController::class, 'votepost']);
+        Route::get('/youngvote', [VoteController::class, 'youngvote']);
+        Route::post('/youngvote', [VoteController::class, 'youngvotepost']);
+    });
 
     Route::group(['middleware' => 'isadmin'],function(){
         Route::get('/admin', [AdminController::class, 'admin']);
