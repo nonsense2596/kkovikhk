@@ -33,6 +33,10 @@ Route::group(['middleware' => ['web','auth']], function (){
     Route::post('/deleteteacher', [AdminController::class, 'deleteteacher']);
     Route::post('/addteacher',[AdminController::class, 'addteacher']);
     Route::post('/modifyteacher',[AdminController::class, 'modifyteacher']);
+
+    Route::post('/addteacheryoung',[AdminController::class, 'addteacheryoung']);
+    Route::post('/deleteteacheryoung', [AdminController::class, 'deleteteacheryoung']);
+    Route::post('/modifyteacheryoung',[AdminController::class, 'modifyteacheryoung']);
 });
 
 Route::get('/auth/schonherz', [SocialController::class, 'schonherzRedirect'])->name('login');

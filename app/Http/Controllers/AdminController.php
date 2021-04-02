@@ -66,4 +66,40 @@ class AdminController extends Controller
         $current_teacher->description = $request->teacherdescription;
         $current_teacher->save();
     }
+    // //////////////////////////////////////////////////////////////////////////////// //
+    public function deleteteacheryoung()
+    {
+        if(!Gate::allows('admin')){
+            abort(403);
+        }
+        $request = request('teacherid');
+        $teacher = YoungTeacher::find($request);
+        $teacher->delete();
+    }
+    // todo inspect this shit
+    public function addteacheryoung()
+    {
+        if(!Gate::allows('admin')){
+            abort(403);
+        }
+        $request = request();
+        //dd($teacher->teachername);
+        $teacher = new YoungTeacher([
+            'name' => $request->teachername,
+            'description' => $request->teacherdescription,
+        ]);
+        $teacher->save();
+        //return redirect('/admin');
+    }
+    public function modifyteacheryoung()
+    {
+        if(!Gate::allows('admin')){
+            abort(403);
+        }
+        $request = request();
+        $current_teacher = YoungTeacher::where('id',$request->teacherid)->firstorfail();
+        $current_teacher->name = $request->teachername;
+        $current_teacher->description = $request->teacherdescription;
+        $current_teacher->save();
+    }
 }
