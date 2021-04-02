@@ -20,9 +20,9 @@
                 @foreach($teachers as $teacher)
                     <div class="row">
                         <div class="form-inline mb-2">
-                            <input type="text" class="form-control mr-2" id="inputPassword2" size="15" value="{{$teacher->name}}">
-                            <input type="text" class="form-control mr-2" id="inputPassword2" size="70" value="{{$teacher->description}}">
-                            <button type="submit" class="btn btn-primary mr-2">A</button>
+                            <input type="text" class="form-control mr-2" size="15" value="{{$teacher->name}}">
+                            <input type="text" class="form-control mr-2" size="70" value="{{$teacher->description}}">
+                            <button type="submit" class="btn btn-primary mr-2">M</button>
                             <button type="submit" class="btn btn-danger mr-2" data-index="{{$teacher->id}}" onClick="deleteTeacher(this)">X</button>
                         </div>
                     </div>
@@ -31,11 +31,10 @@
         </div>
         <hr>
         <div class="row">
-            <form class="form-inline mb-2" method="POST" action="/addteacher" id="addteacher">
-                @csrf
-                <input type="text" class="form-control mr-2" id="inputPassword2" size="15" placeholder="Akari Saito" name="teachername">
-                <input type="text" class="form-control mr-2" id="inputPassword2" size="70" placeholder="For being the best catgirl in the world <3" name="teacherdescription">
-                <button type="submit" class="btn btn-success mr-2" form="addteacher" value="Submit">A</button>
+            <form class="form-inline mb-2">
+                <input type="text" class="form-control mr-2" id="newname" size="15" placeholder="Akari Saito">
+                <input type="text" class="form-control mr-2" id="newdescription" size="70" placeholder="For being the best catgirl in the world <3">
+                <button type="button" class="btn btn-success mr-2" onClick="addTeacher()">A</button>
             </form>
         </div>
     </div>
@@ -44,19 +43,26 @@
 <script src="/js/jquery.parallax.min.js"></script>
 <script>
     function deleteTeacher(param){
-        //console.log(param.dataset.index);
         var teacherid = param.dataset.index;
         $.ajax({
             type: 'POST',
             data: { _token: "{{csrf_token()}}", teacherid },
             url: '/deleteteacher',
             success: function(result){
-                console.log("siker mara, go to jatszani");
                 window.location.reload();
             },
-            error: function(result){
-                console.log("work is da poop, no more");
-            }
+        });
+    }
+    function addTeacher(){
+        var newname = document.getElementById("newname").value;
+        var newdescription = document.getElementById("newdescription").value;
+        $.ajax({
+            type: 'POST',
+            data: { _token: "{{csrf_token()}}", teachername: newname, teacherdescription: newdescription },
+            url: '/addteacher',
+            success: function(result){
+                window.location.reload();
+            },
         });
     }
 </script>
