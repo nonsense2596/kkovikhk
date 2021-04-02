@@ -53,6 +53,17 @@ class AdminController extends Controller
             'description' => $request->teacherdescription,
         ]);
         $teacher->save();
-        return redirect('/admin');
+        //return redirect('/admin');
+    }
+    public function modifyteacher()
+    {
+        if(!Gate::allows('admin')){
+            abort(403);
+        }
+        $request = request();
+        $current_teacher = Teacher::where('id',$request->teacherid)->firstorfail();
+        $current_teacher->name = $request->teachername;
+        $current_teacher->description = $request->teacherdescription;
+        $current_teacher->save();
     }
 }

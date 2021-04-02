@@ -32,6 +32,7 @@ Route::group(['middleware' => ['web','auth']], function (){
     Route::get('/admin', [AdminController::class, 'admin']);
     Route::post('/deleteteacher', [AdminController::class, 'deleteteacher']);
     Route::post('/addteacher',[AdminController::class, 'addteacher']);
+    Route::post('/modifyteacher',[AdminController::class, 'modifyteacher']);
 });
 
 Route::get('/auth/schonherz', [SocialController::class, 'schonherzRedirect'])->name('login');

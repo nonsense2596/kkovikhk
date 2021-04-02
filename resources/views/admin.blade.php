@@ -20,10 +20,10 @@
                 @foreach($teachers as $teacher)
                     <div class="row">
                         <div class="form-inline mb-2">
-                            <input type="text" class="form-control mr-2" size="15" value="{{$teacher->name}}">
-                            <input type="text" class="form-control mr-2" size="70" value="{{$teacher->description}}">
-                            <button type="submit" class="btn btn-primary mr-2">M</button>
-                            <button type="submit" class="btn btn-danger mr-2" data-index="{{$teacher->id}}" onClick="deleteTeacher(this)">X</button>
+                            <input type="text" class="form-control mr-2" size="15" id="name{{$teacher->id}}" value="{{$teacher->name}}">
+                            <input type="text" class="form-control mr-2" size="70" id="description{{$teacher->id}}" value="{{$teacher->description}}">
+                            <button type="button" class="btn btn-primary mr-2" data-index="{{$teacher->id}}" onClick="modifyTeacher(this)">M</button>
+                            <button type="button" class="btn btn-danger mr-2" data-index="{{$teacher->id}}" onClick="deleteTeacher(this)">X</button>
                         </div>
                     </div>
                 @endforeach
@@ -42,6 +42,19 @@
 <script src="/js/jquery-1.7.2.js"></script>
 <script src="/js/jquery.parallax.min.js"></script>
 <script>
+    function modifyTeacher(param){
+        var teacherid = param.dataset.index;
+        var teachername = document.getElementById("name"+teacherid).value;
+        var teacherdescription = document.getElementById("description"+teacherid).value;
+        $.ajax({
+           type: 'POST',
+           data: {_token: "{{csrf_token()}}", teacherid, teachername, teacherdescription},
+            url: '/modifyteacher',
+            success: function(result){
+               window.location.reload();
+            }
+        });
+    }
     function deleteTeacher(param){
         var teacherid = param.dataset.index;
         $.ajax({
@@ -54,13 +67,15 @@
         });
     }
     function addTeacher(){
-        var newname = document.getElementById("newname").value;
-        var newdescription = document.getElementById("newdescription").value;
+        var teachername = document.getElementById("newname").value;
+        var teacherdescription = document.getElementById("newdescription").value;
         $.ajax({
             type: 'POST',
-            data: { _token: "{{csrf_token()}}", teachername: newname, teacherdescription: newdescription },
+            data: { _token: "{{csrf_token()}}", teachername, teacherdescription },
             url: '/addteacher',
             success: function(result){
+                document.getElementById("newname").value="";
+                document.getElementById("newdescription").value="";
                 window.location.reload();
             },
         });
