@@ -7,6 +7,26 @@
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{url('/css/index.css')}}">
+    <style>
+        body{
+            background-color:rgba(52,58,64,0.02);
+        }
+        .chartwrapper{
+            overflow-x: hidden;
+            /*overflow-y: hidden;*/
+            height:500px;
+        }
+
+        #piechart{
+            align-content: center;
+            position: absolute;
+            margin-left:auto;
+            margin-right: auto;
+            height:400px;
+            width:100%;
+        }
+
+    </style>
 </head>
 <body>
 <div class="container-fluid h-100">
@@ -94,11 +114,10 @@
         <!-- pie charts -->
         <br>
         <div class="row">
-            <div class="col-md-8 col-12">
-                <h3>Pite diagram</h3>
-                    <div id="piechart" style="width:700px; height:600px;overflow-y:hidden"></div>
+            <div class="col-lg-8 col-12 chartwrapper">
+                <div id="piechart"></div>
             </div>
-            <div class="col-md-4 col-12">
+            <div class="col-lg-4 col-12">
                 <h3>Eredmények</h3>
                 <ul>
                     @foreach($votecounts as $votecount)
@@ -109,20 +128,14 @@
         </div>
         <!-- pie charts v2 -->
         <br>
-        <div class="row">
-            <div class="col-12">
-                <h3>Pite diagram 2</h3>
-                <div class="row">
-                    <canvas id="myChart"></canvas>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>
 <script src="/js/jquery-1.7.2.js"></script>
 <script src="/js/jquery.parallax.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawChart);
@@ -138,7 +151,8 @@
 
         var options = {
             title: 'Bestest Miqo\'te',
-            chartArea: {left:0,top:0,width:'60%',height:'75%'},
+            chartArea: {left:0,width:'80%',height:'75%'},
+            backgroundColor: { 'fill': '#343A40', 'fillOpacity': 0.001 },
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
