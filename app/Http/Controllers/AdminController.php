@@ -24,7 +24,7 @@ class AdminController extends Controller
 
         $current_user = Auth::user();
 
-        $votecounts = $this->countvotes();
+        $votecounts = $this->countvotes()->sortByDesc("count");
 
         $teachers = Teacher::all();
 
@@ -142,7 +142,7 @@ class AdminController extends Controller
     public function countvotes(){
         return DB::table('votes')
             ->join('teachers','votes.teacher_id','=','teachers.id')
-            ->select('teachers.name',DB::raw("count(votes.teacher_id) as count"))
+            ->select('teachers.name as name',DB::raw("count(votes.teacher_id) as count"))
             ->groupBy('teachers.name')
             ->get();
     }

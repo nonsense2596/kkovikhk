@@ -22,11 +22,14 @@
                     <form class="form-inline mb-2">
                         <input type="date" class="form-control mr-2" id="startdate" name="startdate" value="{{$votingperiod->start}}">
                         <input type="date" class="form-control mr-2" id="enddate" name="enddate" value="{{$votingperiod->end}}">
-                        <button type="button" class="btn btn-success mr-2" onClick="setVotingPeriod()">S</button>
-                        <button type="button" class="btn btn-danger mr-2" onClick="endVotingPeriod()">X</button>
-                        @if($votingperiod->start==null)
-                            <span>The system is <b><u>not</u></b> accepting votes</span>
-                        @else
+                        <div class="mt-1 mr-3">
+                            <button type="button" class="btn btn-success" onClick="setVotingPeriod()">S</button>
+                            <button type="button" class="btn btn-danger" onClick="endVotingPeriod()">X</button>
+                        </div>
+                        @if(($votingperiod->start==null && $votingperiod->end==null) || (date('Y-m-d')<$votingperiod->start || date('Y-m-d')>$votingperiod->end))
+                            <span>The system is currently <b><u>not</u></b> accepting votes</span>
+                        @endif
+                        @if(!($votingperiod->start==null && $votingperiod->end==null))
                             <span>The system is accepting votes between <b>{{$votingperiod->start}}</b> (0:01) and <b>{{$votingperiod->end}}</b> (23:59)</span>
                         @endif
                     </form>
@@ -38,23 +41,27 @@
             <div class="col-12">
                 <h3>Teacher list</h3>
                 @foreach($teachers as $teacher)
-                    <div class="row">
-                        <div class="form-inline mb-2">
-                            <input type="text" class="form-control mr-2" size="15" id="name{{$teacher->id}}" value="{{$teacher->name}}">
-                            <input type="text" class="form-control mr-2" size="70" id="description{{$teacher->id}}" value="{{$teacher->description}}">
-                            <button type="button" class="btn btn-primary mr-2" data-index="{{$teacher->id}}" onClick="modifyTeacher(this)">M</button>
-                            <button type="button" class="btn btn-danger mr-2" data-index="{{$teacher->id}}" onClick="deleteTeacher(this)">X</button>
+                    <form class="row mb-2">
+                        <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12 col-md-2" id="name{{$teacher->id}}" value="{{$teacher->name}}">
+                        <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12 col-md-8" id="description{{$teacher->id}}" value="{{$teacher->description}}">
+                        <div class="div mr-0 mr-md-2 mt-1">
+                            <button type="button" class="btn btn-primary" data-index="{{$teacher->id}}" onClick="modifyTeacher(this)">M</button>
+                            <button type="button" class="btn btn-danger" data-index="{{$teacher->id}}" onClick="deleteTeacher(this)">X</button>
                         </div>
-                    </div>
+                    </form>
                 @endforeach
             </div>
         </div>
         <div class="row">
-            <form class="form-inline mb-2">
-                <input type="text" class="form-control mr-2" id="newname" size="15" placeholder="Akari Saito">
-                <input type="text" class="form-control mr-2" id="newdescription" size="70" placeholder="For being the best catgirl in the world <3">
-                <button type="button" class="btn btn-success mr-2" onClick="addTeacher()">A</button>
-            </form>
+            <div class="col-12">
+                <form class="row mb-2">
+                    <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12 col-md-2" id="newname" size="15" placeholder="Akari Saito">
+                    <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12 col-md-8" id="newdescription" size="60" placeholder="For being the best catgirl in the world <3">
+                    <div class="div mr-0 mr-md-2 mt-1">
+                        <button type="button" class="btn btn-success mr-2" onClick="addTeacher()">A</button>
+                    </div>
+                </form>
+            </div>
         </div>
         <!-- YOUNG TEACHER LIST -->
         <br>
@@ -62,31 +69,51 @@
             <div class="col-12">
                 <h3>Young Teacher list</h3>
                 @foreach($teachers_young as $teacher_young)
-                    <div class="row">
-                        <div class="form-inline mb-2">
-                            <input type="text" class="form-control mr-2" size="15" id="name{{$teacher_young->id}}young" value="{{$teacher_young->name}}">
-                            <input type="text" class="form-control mr-2" size="70" id="description{{$teacher_young->id}}young" value="{{$teacher_young->description}}">
-                            <button type="button" class="btn btn-primary mr-2" data-index="{{$teacher_young->id}}" onClick="modifyTeacherYoung(this)">M</button>
-                            <button type="button" class="btn btn-danger mr-2" data-index="{{$teacher_young->id}}" onClick="deleteTeacherYoung(this)">X</button>
-                        </div>
-                    </div>
+                    <form class="row mb-2">
+                            <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12 col-md-2" id="name{{$teacher_young->id}}young" value="{{$teacher_young->name}}">
+                            <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12 col-md-8" id="description{{$teacher_young->id}}young" value="{{$teacher_young->description}}">
+                            <div class="div mr-0 mr-md-2 mt-1">
+                                <button type="button" class="btn btn-primary" data-index="{{$teacher_young->id}}" onClick="modifyTeacherYoung(this)">M</button>
+                                <button type="button" class="btn btn-danger" data-index="{{$teacher_young->id}}" onClick="deleteTeacherYoung(this)">X</button>
+                            </div>
+                    </form>
                 @endforeach
             </div>
         </div>
         <div class="row">
-            <form class="form-inline mb-2">
-                <input type="text" class="form-control mr-2" id="newnameyoung" size="15" placeholder="Akari Saito">
-                <input type="text" class="form-control mr-2" id="newdescriptionyoung" size="70" placeholder="For being the best catgirl in the world <3">
-                <button type="button" class="btn btn-success mr-2" onClick="addTeacherYoung()">A</button>
-            </form>
+            <div class="col-12">
+                <form class="row mb-2">
+                    <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12 col-md-2" id="newnameyoung" placeholder="Akari Saito">
+                    <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12 col-md-8" id="newdescriptionyoung"  placeholder="For being the best catgirl in the world <3">
+                    <div class="div mr-0 mr-md-2 mt-1">
+                        <button type="button" class="btn btn-success mr-2" onClick="addTeacherYoung()">A</button>
+                    </div>
+                </form>
+            </div>
         </div>
         <!-- pie charts -->
         <br>
         <div class="row">
-            <div class="col-12">
+            <div class="col-md-8 col-12">
                 <h3>Pite diagram</h3>
+                    <div id="piechart" style="width:700px; height:600px;overflow-y:hidden"></div>
+            </div>
+            <div class="col-md-4 col-12">
+                <h3>Eredmények</h3>
+                <ul>
+                    @foreach($votecounts as $votecount)
+                        <li><b>{{$votecount->name}}</b>: {{$votecount->count}}</li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+        <!-- pie charts v2 -->
+        <br>
+        <div class="row">
+            <div class="col-12">
+                <h3>Pite diagram 2</h3>
                 <div class="row">
-                    <div id="piechart" style="width: 900px; height: 500px;"></div>
+                    <canvas id="myChart"></canvas>
                 </div>
             </div>
         </div>
@@ -95,6 +122,7 @@
 <script src="/js/jquery-1.7.2.js"></script>
 <script src="/js/jquery.parallax.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawChart);
@@ -110,6 +138,7 @@
 
         var options = {
             title: 'Bestest Miqo\'te',
+            chartArea: {left:0,top:0,width:'60%',height:'75%'},
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
