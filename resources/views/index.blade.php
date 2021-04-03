@@ -40,6 +40,7 @@
                                 @if($current_user->isadmin)
                                     <a href="{{ url('/admin') }}" class="btn btn-success col-lg-12 col-12 mt-2">Admin</a>
                                 @endif
+                                <a href="{{ url('auth/schonherz/logout') }}" class="btn btn-danger col-lg-12 col-12 mt-2">Logout</a>
                             @endauth
                         </div>
                     </div>

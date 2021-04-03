@@ -26,6 +26,15 @@
             width:100%;
         }
 
+        #piechartyoung{
+            align-content: center;
+            position: absolute;
+            margin-left:auto;
+            margin-right: auto;
+            height:400px;
+            width:100%;
+        }
+
     </style>
 </head>
 <body>
@@ -128,7 +137,19 @@
         </div>
         <!-- pie charts v2 -->
         <br>
-
+        <div class="row">
+            <div class="col-lg-8 col-12 chartwrapper">
+                <div id="piechartyoung"></div>
+            </div>
+            <div class="col-lg-4 col-12">
+                <h3>Eredmények</h3>
+                <ul>
+                    @foreach($votecountsyoung as $votecount)
+                        <li><b>{{$votecount->name}}</b>: {{$votecount->count}}</li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 <script src="/js/jquery-1.7.2.js"></script>
@@ -156,6 +177,30 @@
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+    }
+</script>
+<script>
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+            ['Name', 'Vote count'],
+                @foreach($votecountsyoung as $votecount)
+            ['{{$votecount->name}}',{{$votecount->count}}],
+            @endforeach
+        ]);
+
+        var options = {
+            title: 'Bestest Young Miqo\'te',
+            chartArea: {left:0,width:'80%',height:'75%'},
+            backgroundColor: { 'fill': '#343A40', 'fillOpacity': 0.001 },
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechartyoung'));
 
         chart.draw(data, options);
     }

@@ -26,13 +26,15 @@ class AdminController extends Controller
 
         $votecounts = $this->countvotes()->sortByDesc("count");
 
+        $votecountsyoung = $this->countvotesyoung()->sortByDesc("count");
+
         $teachers = Teacher::all();
 
         $teachers_young = YoungTeacher::all();
 
         $votingperiod = VotingPeriod::getVotingPeriodOrInit();
 
-        return view("admin", compact('current_user','teachers','teachers_young','votingperiod','votecounts'));
+        return view("admin", compact('current_user','teachers','teachers_young','votingperiod','votecounts','votecountsyoung'));
     }
 
     public function setvotingperiod()
@@ -144,6 +146,13 @@ class AdminController extends Controller
             ->join('teachers','votes.teacher_id','=','teachers.id')
             ->select('teachers.name as name',DB::raw("count(votes.teacher_id) as count"))
             ->groupBy('teachers.name')
+            ->get();
+    }
+    public function countvotesyoung(){
+        return DB::table('young_votes')
+            ->join('young_teachers','young_votes.teacher_id','=','young_teachers.id')
+            ->select('young_teachers.name as name',DB::raw("count(young_votes.teacher_id) as count"))
+            ->groupBy('young_teachers.name')
             ->get();
     }
 }
