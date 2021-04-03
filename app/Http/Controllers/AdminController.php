@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller as Controller;
 use App\Models\Teacher;
 use App\Models\YoungTeacher;
+use App\Models\Vote;
+use App\Models\YoungVote;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
@@ -25,8 +27,10 @@ class AdminController extends Controller
         $current_user = Auth::user();
 
         $votecounts = $this->countvotes()->sortByDesc("count");
+        $votenum = Vote::count();
 
         $votecountsyoung = $this->countvotesyoung()->sortByDesc("count");
+        $votenumyoung = YoungVote::count();
 
         $teachers = Teacher::all();
 
@@ -34,7 +38,15 @@ class AdminController extends Controller
 
         $votingperiod = VotingPeriod::getVotingPeriodOrInit();
 
-        return view("admin", compact('current_user','teachers','teachers_young','votingperiod','votecounts','votecountsyoung'));
+        return view("admin", compact(
+            'current_user',
+            'teachers',
+            'teachers_young',
+            'votingperiod',
+            'votecounts',
+            'votecountsyoung',
+            'votenum',
+            'votenumyoung'));
     }
 
     public function setvotingperiod()

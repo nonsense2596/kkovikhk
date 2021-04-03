@@ -66,9 +66,9 @@
             }, 500);
         });
         jQuery('.bg').parallax({
-            frameDuration: 40,
-            xparallax: '15px',
-            yparallax: '15px'
+            frameDuration: 20,
+            xparallax: '25px',
+            yparallax: '25px'
         });
     });
 </script>

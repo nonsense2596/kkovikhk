@@ -12,7 +12,7 @@
             background-color:rgba(52,58,64,0.02);
         }
         .chartwrapper{
-            overflow-x: hidden;
+            /*overflow-x: hidden;*/
             /*overflow-y: hidden;*/
             height:500px;
         }
@@ -124,10 +124,11 @@
         <br>
         <div class="row">
             <div class="col-lg-8 col-12 chartwrapper">
+                <h3>Kar Kiváló Oktatója</h3>
                 <div id="piechart"></div>
             </div>
             <div class="col-lg-4 col-12">
-                <h3>Eredmények</h3>
+                <h3>Eredmények ({{$votenum}})</h3>
                 <ul>
                     @foreach($votecounts as $votecount)
                         <li><b>{{$votecount->name}}</b>: {{$votecount->count}}</li>
@@ -139,10 +140,11 @@
         <br>
         <div class="row">
             <div class="col-lg-8 col-12 chartwrapper">
+                <h3>Kar Kiváló Fiatal Oktatója</h3>
                 <div id="piechartyoung"></div>
             </div>
             <div class="col-lg-4 col-12">
-                <h3>Eredmények</h3>
+                <h3>Eredmények ({{$votenumyoung}})</h3>
                 <ul>
                     @foreach($votecountsyoung as $votecount)
                         <li><b>{{$votecount->name}}</b>: {{$votecount->count}}</li>
@@ -171,8 +173,7 @@
         ]);
 
         var options = {
-            title: 'Bestest Miqo\'te',
-            chartArea: {left:0,width:'80%',height:'75%'},
+            chartArea: {left:10,width:'80%',height:'75%'},
             backgroundColor: { 'fill': '#343A40', 'fillOpacity': 0.001 },
         };
 
@@ -195,8 +196,7 @@
         ]);
 
         var options = {
-            title: 'Bestest Young Miqo\'te',
-            chartArea: {left:0,width:'80%',height:'75%'},
+            chartArea: {left:10,width:'80%',height:'75%'},
             backgroundColor: { 'fill': '#343A40', 'fillOpacity': 0.001 },
         };
 
@@ -264,7 +264,7 @@
             success: function(result){
                 document.getElementById("newname").value="";
                 document.getElementById("newdescription").value="";
-                window.location.reload();
+                window.location.reload(true);
             },
         });
     }
@@ -303,7 +303,7 @@
             success: function(result){
                 document.getElementById("newnameyoung").value="";
                 document.getElementById("newdescriptionyoung").value="";
-                window.location.reload();
+                window.location.reload(true);
             },
         });
     }
