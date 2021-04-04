@@ -23,7 +23,10 @@ class AdminController extends Controller
         /*if(!Gate::allows('admin')){
             abort(403);
         }*/
+        // test date arithmetics
+        //dd([date('Y-m-d'),date('Y-m-d',strtotime('+1 days'))]);
 
+        // test date arithmetics
         $current_user = Auth::user();
 
         $votecounts = $this->countvotes()->sortByDesc("count");
@@ -37,6 +40,8 @@ class AdminController extends Controller
         $teachers_young = YoungTeacher::all();
 
         $votingperiod = VotingPeriod::getVotingPeriodOrInit();
+
+        //if(date('Y-m-d')<)
 
         return view("admin", compact(
             'current_user',

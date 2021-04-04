@@ -152,6 +152,16 @@
                 </ul>
             </div>
         </div>
+        <!-- voting data -->
+        <br>
+        <div class="row">
+            <div class="col-12">
+                <h3>Voting data</h3>
+                <form class="row mb-2">
+                    <p>There are X votes from Y unique users in the system</p>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 <script src="/js/jquery-1.7.2.js"></script>
