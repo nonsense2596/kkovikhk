@@ -12,12 +12,12 @@
 <div class="container-fluid content">
     <div class="container">
         <div class="row">
-            <h1>Admin page</h1>
+            <h1>Admin</h1>
         </div>
         <!-- VOTING PERIOD -->
         <div class="row">
             <div class="col-12">
-                <h3>Voting period</h3>
+                <h3>Szavazási időszak</h3>
                 <div class="row">
                     <form class="form-inline mb-2">
                         <input type="date" class="form-control mr-2" id="startdate" name="startdate" value="{{$votingperiod->start}}">
@@ -27,10 +27,10 @@
                             <button type="button" class="btn btn-danger" onClick="endVotingPeriod()">X</button>
                         </div>
                         @if(($votingperiod->start==null && $votingperiod->end==null) || (date('Y-m-d')<$votingperiod->start || date('Y-m-d')>$votingperiod->end))
-                            <span>The system is currently <b><u>not</u></b> accepting votes</span>
+                            <span>A rendszer jelenleg <b><u>nem</u></b> fogad szavazatokat</span>
                         @endif
                         @if(!($votingperiod->start==null && $votingperiod->end==null))
-                            <span>The system is accepting votes between <b>{{$votingperiod->start}}</b> (0:01) and <b>{{$votingperiod->end}}</b> (23:59)</span>
+                            <span>A szavazás <b>{{$votingperiod->start}}</b> (0:01) és <b>{{$votingperiod->end}}</b> (23:59) között él.</span>
                         @endif
                     </form>
                 </div>
@@ -39,7 +39,7 @@
         <!-- TEACHER LIST -->
         <div class="row">
             <div class="col-12">
-                <h3>Teacher list</h3>
+                <h3>Oktató lista</h3>
                 @foreach($teachers as $teacher)
                     <form class="row mb-2">
                         <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12 col-md-2" id="name{{$teacher->id}}" value="{{$teacher->name}}">
@@ -67,7 +67,7 @@
         <br>
         <div class="row">
             <div class="col-12">
-                <h3>Young Teacher list</h3>
+                <h3>Fiatal oktató lista</h3>
                 @foreach($teachers_young as $teacher_young)
                     <form class="row mb-2">
                             <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12 col-md-2" id="name{{$teacher_young->id}}young" value="{{$teacher_young->name}}">
@@ -127,10 +127,10 @@
         <br>
         <div class="row">
             <div class="col-12">
-                <h3>Voting data</h3>
-                <p>There are a total of <b>{{$votenum+$votenumyoung}} votes</b> in the system: <b>{{$votenum}} votes for teachers</b>, and <b>{{$votenumyoung}} for young</b> teachers; from <b>{{$uniquevotenum}} unique</b> accounts.</p>
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteVotesModal">Delete votes</button>
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteVotesYoungModal">Delete young votes</button>
+                <h3>Szavazási adatok</h3>
+                <p>Összesen <b>{{$votenum+$votenumyoung}} szavazat</b> van a rendszerben. Ebből <b>{{$votenum}} oktatóra</b> és <b>{{$votenumyoung}} fiatal oktatóra</b> érkezett <b>{{$uniquevotenum}} egyedi</b> fiókból.</p>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteVotesModal">Oktató szavazatok törlése</button>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteVotesYoungModal">Fiatal oktató szavazatok törlése</button>
             </div>
         </div>
     </div>
@@ -142,14 +142,14 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">U sure u wanna delete all them votes?</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Biztos ki akarsz törölni minden [Oktató] szavazatot?</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Nah</button>
-                <button type="button" class="btn btn-danger" onClick="deleteVotes()">Ya</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Nem</button>
+                <button type="button" class="btn btn-danger" onClick="deleteVotes()">Igen</button>
             </div>
         </div>
     </div>
@@ -158,14 +158,14 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">U sure u wanna delete all them votes?</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Biztos ki akarsz törölni minden [Fiatal oktató] szavazatot?</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Nah</button>
-                <button type="button" class="btn btn-danger" onClick="deleteVotesYoung()">Ya</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Nem</button>
+                <button type="button" class="btn btn-danger" onClick="deleteVotesYoung()">Igen</button>
             </div>
         </div>
     </div>
