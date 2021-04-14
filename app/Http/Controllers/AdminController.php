@@ -30,6 +30,7 @@ class AdminController extends Controller
         $current_user = Auth::user();
 
         $votecounts = $this->countvotes()->sortByDesc("count");
+
         $votenum = Vote::count();
 
         $votecountsyoung = $this->countvotesyoung()->sortByDesc("count");
@@ -41,6 +42,7 @@ class AdminController extends Controller
 
         $votingperiod = VotingPeriod::getVotingPeriodOrInit();
 
+        $uniquevotenum = $this->countunique();
         //if(date('Y-m-d')<)
 
         return view("admin", compact(
@@ -51,7 +53,9 @@ class AdminController extends Controller
             'votecounts',
             'votecountsyoung',
             'votenum',
-            'votenumyoung'));
+            'votenumyoung',
+            'uniquevotenum'
+        ));
     }
 
     public function setvotingperiod()
@@ -171,5 +175,18 @@ class AdminController extends Controller
             ->select('young_teachers.name as name',DB::raw("count(young_votes.teacher_id) as count"))
             ->groupBy('young_teachers.name')
             ->get();
+    }
+    public function countunique(){
+        $votes = Vote::select('user_id')->get();
+        $youngvotes = YoungVote::select('user_id')->get();
+        $cumultative = $votes->concat($youngvotes);
+
+        return count(collect($cumultative)->unique('user_id')->all());
+    }
+    public function deletevotes(){
+        Vote::truncate();
+    }
+    public function deletevotesyoung(){
+        YoungVote::truncate();
     }
 }

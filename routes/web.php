@@ -46,6 +46,9 @@ Route::group(['middleware' => ['web','auth']], function (){
 
         Route::post('/setvotingperiod',[AdminController::class, 'setvotingperiod']);
         Route::post('/endvotingperiod',[AdminController::class, 'endvotingperiod']);
+
+        Route::post('/deletevotes',[AdminController::class, 'deletevotes']);
+        Route::post('/deletevotesyoung',[AdminController::class, 'deletevotesyoung']);
     });
 
 });

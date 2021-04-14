@@ -128,19 +128,55 @@
         <div class="row">
             <div class="col-12">
                 <h3>Voting data</h3>
-                <form class="row mb-2">
-                    <p>There are X votes from Y unique users in the system</p>
-                </form>
+                <p>There are a total of <b>{{$votenum+$votenumyoung}} votes</b> in the system: <b>{{$votenum}} votes for teachers</b>, and <b>{{$votenumyoung}} for young</b> teachers; from <b>{{$uniquevotenum}} unique</b> accounts.</p>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteVotesModal">Delete votes</button>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteVotesYoungModal">Delete young votes</button>
             </div>
         </div>
     </div>
     <div class="footer-spacer"></div>
 </div>
 
-<script src="/js/jquery-1.7.2.js"></script>
-<script src="/js/jquery.parallax.min.js"></script>
+<!-- Modal -->
+<div class="modal fade" id="deleteVotesModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">U sure u wanna delete all them votes?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Nah</button>
+                <button type="button" class="btn btn-danger" onClick="deleteVotes()">Ya</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteVotesYoungModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">U sure u wanna delete all them votes?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Nah</button>
+                <button type="button" class="btn btn-danger" onClick="deleteVotesYoung()">Ya</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
     google.charts.load('current', {'packages':['corechart']});
@@ -189,6 +225,32 @@
     }
 </script>
 <script>
+    function deleteVotes()
+    {
+        $.ajax({
+            type: 'POST',
+            data: {_token:"{{csrf_token()}}"},
+            url: '/deletevotes',
+            success: function(result){
+                //$("#deleteVotesModal").modal('hide');
+                window.location.reload();
+            }
+        });
+    }
+
+    function deleteVotesYoung()
+    {
+        $.ajax({
+            type: 'POST',
+            data: {_token:"{{csrf_token()}}"},
+            url: '/deletevotesyoung',
+            success: function(result){
+                //$("#deleteVotesYoungModal").modal('hide');
+                window.location.reload();
+            }
+        });
+    }
+
     function setVotingPeriod(){
         var startdate = document.getElementById("startdate").value;
         var enddate = document.getElementById("enddate").value;
