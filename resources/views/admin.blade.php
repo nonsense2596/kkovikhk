@@ -6,39 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{url('/css/index.css')}}">
-    <style>
-        body{
-            background-color:rgba(52,58,64,0.02);
-        }
-        .chartwrapper{
-            /*overflow-x: hidden;*/
-            /*overflow-y: hidden;*/
-            height:500px;
-        }
-
-        #piechart{
-            align-content: center;
-            position: absolute;
-            margin-left:auto;
-            margin-right: auto;
-            height:400px;
-            width:100%;
-        }
-
-        #piechartyoung{
-            align-content: center;
-            position: absolute;
-            margin-left:auto;
-            margin-right: auto;
-            height:400px;
-            width:100%;
-        }
-
-    </style>
+    <link rel="stylesheet" href="{{url('/css/admin.css')}}">
 </head>
 <body>
-<div class="container-fluid h-100">
+<div class="container-fluid content">
     <div class="container">
         <div class="row">
             <h1>Admin page</h1>
@@ -163,7 +134,9 @@
             </div>
         </div>
     </div>
+    <div class="footer-spacer"></div>
 </div>
+
 <script src="/js/jquery-1.7.2.js"></script>
 <script src="/js/jquery.parallax.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -183,7 +156,7 @@
         ]);
 
         var options = {
-            chartArea: {left:10,width:'80%',height:'75%'},
+            chartArea: {left:10,width:'80%',height:'75%',right:'0px'},
             backgroundColor: { 'fill': '#343A40', 'fillOpacity': 0.001 },
         };
 
@@ -206,7 +179,7 @@
         ]);
 
         var options = {
-            chartArea: {left:10,width:'80%',height:'75%'},
+            chartArea: {left:10,width:'80%',height:'75%',right:'0px'},
             backgroundColor: { 'fill': '#343A40', 'fillOpacity': 0.001 },
         };
 
