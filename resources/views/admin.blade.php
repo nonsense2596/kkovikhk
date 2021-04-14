@@ -55,8 +55,8 @@
         <div class="row">
             <div class="col-12">
                 <form class="row mb-2">
-                    <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12 col-md-2" id="newname" size="15" placeholder="Akari Saito">
-                    <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12 col-md-8" id="newdescription" size="60" placeholder="For being the best catgirl in the world <3">
+                    <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12 col-md-2" id="newname" size="15" placeholder="Új név hozzáadása...">
+                    <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12 col-md-8" id="newdescription" size="60" placeholder="Új indoklás hozzáadása...">
                     <div class="div mr-0 mr-md-2 mt-1">
                         <button type="button" class="btn btn-success mr-2" onClick="addTeacher()">A</button>
                     </div>
@@ -83,8 +83,8 @@
         <div class="row">
             <div class="col-12">
                 <form class="row mb-2">
-                    <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12 col-md-2" id="newnameyoung" placeholder="Akari Saito">
-                    <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12 col-md-8" id="newdescriptionyoung"  placeholder="For being the best catgirl in the world <3">
+                    <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12 col-md-2" id="newnameyoung" placeholder="Új név hozzáadása...">
+                    <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12 col-md-8" id="newdescriptionyoung"  placeholder="Új indoklás hozzáadása...">
                     <div class="div mr-0 mr-md-2 mt-1">
                         <button type="button" class="btn btn-success mr-2" onClick="addTeacherYoung()">A</button>
                     </div>

@@ -14,40 +14,33 @@
     <link rel="stylesheet" href="{{url('/css/vote.css')}}">
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <h1>Voting page</h1>
-    </div>
-    <div class="row">
-        <h3>choose only one</h3>
-    </div>
-
-    <div class="row">
-        <form method="POST" action="/youngvote" id="form1">
-            @csrf
-            @foreach($teachers as $teacher)
-                <label>
-                    <input type="radio" name="name" class="card-input-element d-none" value="{{$teacher->id}}">
-                    <div class="card d-flex flex-row justify-content-between">
-                        <div class="card-body my-card-header">
-                            {{$teacher->name}}
+    <div class="container">
+        <div class="row">
+            <h1>Kar Kiváló Fiatal Oktatója</h1>
+        </div>
+        <div class="row">
+            <form method="POST" action="/youngvote" id="form1">
+                @csrf
+                @foreach($teachers as $teacher)
+                    <label>
+                        <input type="radio" name="name" class="card-input-element d-none" value="{{$teacher->id}}">
+                        <div class="card d-flex flex-row justify-content-between">
+                            <div class="card-body my-card-header">
+                                {{$teacher->name}}
+                            </div>
+                            <div class="card-body">
+                                {{$teacher->description}}
+                            </div>
                         </div>
-                        <div class="card-body">
-                            {{$teacher->description}}
-                        </div>
-                    </div>
-                </label>
-            @endforeach
-        </form>
+                    </label>
+                @endforeach
+            </form>
+        </div>
+        <div class="row">
+            <button type="submit" class="btn btn-primary mb-5" form="form1" value="Submit">
+                Szavazás
+            </button>
+        </div>
     </div>
-    <div class="row">
-        <button type="submit" class="btn btn-primary mb-5" form="form1" value="Submit">
-            Vote Now
-        </button>
-    </div>
-
-</div>
-
-
 </body>
 </html>

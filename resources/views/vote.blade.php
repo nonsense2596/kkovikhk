@@ -16,12 +16,8 @@
 <body>
     <div class="container">
         <div class="row">
-            <h1>Voting page</h1>
+            <h1>Kar Kiváló Oktatója</h1>
         </div>
-        <div class="row">
-            <h3>choose only one</h3>
-        </div>
-
         <div class="row">
             <form method="POST" action="/vote" id="form1">
                 @csrf
@@ -42,12 +38,9 @@
         </div>
         <div class="row">
             <button type="submit" class="btn btn-primary mb-5" form="form1" value="Submit">
-                Vote Now
+                Szavazás
             </button>
         </div>
-
     </div>
-
-
 </body>
 </html>
