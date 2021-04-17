@@ -30,7 +30,11 @@
                             <span>A rendszer jelenleg <b><u>nem</u></b> fogad szavazatokat</span>
                         @endif
                         @if(!($votingperiod->start==null && $votingperiod->end==null))
-                            <span>A szavazás <b>{{$votingperiod->start}}</b> (0:01) és <b>{{$votingperiod->end}}</b> (23:59) között él.</span>
+                            <span>A szavazás <b>{{$votingperiod->start}}</b> (0:01) és <b>{{$votingperiod->end}}</b> (23:59) között él.
+                            @if(date('Y-m-d')>=$votingperiod->start)
+                            A szavazásból hátralévő idő: <span id="countdowntimer">X nap Y óra Z perc ZZ másodperc.</span>
+                            @endif
+                            </span>
                         @endif
                     </form>
                 </div>
@@ -355,5 +359,24 @@
 
 
 </script>
+@if(!($votingperiod->start==null && $votingperiod->end==null) && date('Y-m-d')>=$votingperiod->start)
+<script>
+    var countDownDate = new Date("{{$votingperiod->end}} 23:59").getTime();
+    var x = setInterval(function() {
+        var now = new Date().getTime();
+        var distance = countDownDate - now;
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        document.getElementById("countdowntimer").innerHTML = days + " nap " + hours + " óra "
+            + minutes + " perc " + seconds + " másodperc ";
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("countdowntimer").innerHTML = "VÉGET ÉRT";
+        }
+    }, 1000);
+</script>
+@endif
 </body>
 </html>

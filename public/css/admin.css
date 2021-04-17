@@ -30,4 +30,6 @@ body{
 .footer-spacer{
     height:70px;
 }
-
+#countdowntimer{
+    font-weight: bold;
+}
