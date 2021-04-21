@@ -62,3 +62,14 @@ body {
     background-image: url("/imgs/img1.svg");
     background-repeat: repeat;
 }
+
+.deletebutton{
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #b0b0b0;
+}
+.deletebutton:hover{
+    text-decoration: none;
+    color: #d0d0d0;
+}

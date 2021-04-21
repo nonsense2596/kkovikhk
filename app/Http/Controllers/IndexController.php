@@ -24,4 +24,12 @@ class IndexController extends Controller
         $already_voted_young = $current_user->has_already_voted_young();
         return view("voteselect", compact('already_voted','already_voted_young'));
     }
+    public function deleteaccget()
+    {
+        return view("deleteacc");
+    }
+    public function deleteaccpost()
+    {
+        //
+    }
 }

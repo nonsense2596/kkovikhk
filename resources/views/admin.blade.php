@@ -356,8 +356,6 @@
             },
         });
     }
-
-
 </script>
 @if(!($votingperiod->start==null && $votingperiod->end==null) && date('Y-m-d')>=$votingperiod->start)
 <script>

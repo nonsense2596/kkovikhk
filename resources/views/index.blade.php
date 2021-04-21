@@ -42,6 +42,9 @@
                                 @endif
                                 <a href="{{ url('auth/schonherz/logout') }}" class="btn btn-danger col-lg-12 col-12 mt-2">Kijelentkezés</a>
                             @endauth
+                            @auth
+                                <a href="{{url('/deleteacc')}}" class="deletebutton">Fiók törlése</a>
+                            @endauth
                         </div>
                     </div>
                     <br><br>
@@ -54,6 +57,10 @@
         </div>
     </div>
 </div>
+
+
+
+
 <script src="/js/jquery-1.7.2.js"></script>
 <script src="/js/jquery.parallax.min.js"></script>
 <script>
