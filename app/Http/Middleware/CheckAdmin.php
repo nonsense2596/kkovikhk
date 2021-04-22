@@ -21,6 +21,6 @@ class CheckAdmin
         if($current_user->isadmin)
             return $next($request);
         else
-            return redirect('/');
+            return redirect()->back();
     }
 }
