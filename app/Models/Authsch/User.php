@@ -22,6 +22,7 @@ class User extends Authenticatable
         'displayName',
         'mail',
         'bmeunitscope',
+        'reqmail',
     ];
 
     public function has_already_voted()
@@ -32,5 +33,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(YoungVote::class)->count()>0;
     }
+
 
 }

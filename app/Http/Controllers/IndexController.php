@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\VotingPeriod;
 use Illuminate\Http\Request;
-use App\Models\User;    // talan nem kell
+use App\Models\Authsch\User;    // talan nem kell
 use App\Http\Controllers\Controller as Controller;
 
 use Auth;

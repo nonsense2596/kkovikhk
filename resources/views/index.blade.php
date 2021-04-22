@@ -43,11 +43,15 @@
                                 <a href="{{ url('auth/schonherz/logout') }}" class="btn btn-danger col-lg-12 col-12 mt-2">Kijelentkezés</a>
                             @endauth
                             @auth
-                                <a href="{{url('/deleteacc')}}" class="deletebutton">Fiók törlése</a>
+                                <div class="custom-control custom-checkbox options">
+                                    <input type="checkbox" class="custom-control-input checkbox" id="customCheck1" onclick="ohmyclick()">
+                                    <label class="custom-control-label" for="customCheck1">E-mail új szavazásokról</label>
+                                </div>
                             @endauth
-                            @if(session('message'))
-                                <p>{{session('message')}}</p>
-                            @endif
+                            @auth
+                                <a href="{{url('/deleteacc')}}" class="options">Fiók törlése</a>
+                            @endauth
+
                         </div>
                     </div>
                     <br><br>
@@ -67,6 +71,9 @@
     @include('toast', array('message'=>session('message')))
 @endif
 <script>
+    function ohmyclick(){
+        alert('lol');
+    }
     jQuery(document).ready(function() {
         jQuery(document.body).one('mouseenter', function() {
             setTimeout(function() {
@@ -81,6 +88,7 @@
             yparallax: '25px'
         });
     });
+
 </script>
 </body>
 

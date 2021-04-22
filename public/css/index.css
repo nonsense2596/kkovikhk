@@ -63,13 +63,14 @@ body {
     background-repeat: repeat;
 }
 
-.deletebutton{
+.options{
+    margin-top:15px;
     display: block;
-    margin-top: 10px;
     text-decoration: none;
     color: #b0b0b0;
 }
-.deletebutton:hover{
+.options:hover{
     text-decoration: none;
     color: #d0d0d0;
 }
+
