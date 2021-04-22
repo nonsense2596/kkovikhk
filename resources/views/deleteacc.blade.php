@@ -23,34 +23,18 @@
                 <div class="col-lg-8 offset-lg-2 col-sm-10 offset-sm-1 col-md-8 offset-md-2">
                     <h1>Biztosan törölni szeretnéd a fiókodat?</h1>
                     <br><br>
-                    <div class="btn-group" role="group">
-                        <a href="#" class="btn btn-outline-danger" onclick="deleteacc()">Igen</a>
-                        <a href="{{ url('/')}}" class="btn btn-outline-secondary">Nem</a>
-                    </div>
+                        <form action="/deleteacc" method="POST" class="btn-group" role="group">
+                            @csrf
+                            <button type="submit" class="btn btn-outline-danger">asd</button>
+                            <a href="{{ url('/')}}" class="btn btn-outline-secondary">Nem</a>
+                        </form>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
-
-
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-    function deleteacc(){
-        $.ajax({
-            type: 'POST',
-            data: {_token:"{{csrf_token()}}"},
-            url: '/deleteacc',
-            success:function(result){
-                location.href = "{{url('/')}}";
-            }
-        });
-    }
-</script>
 </body>
 </html>
 

@@ -30,6 +30,12 @@ class IndexController extends Controller
     }
     public function deleteaccpost()
     {
-        //
+        // do stuff
+        $current_user = Auth::user();
+        $dbuser = User::where('id',$current_user->id)->first();
+        $dbuser->delete();
+
+        return redirect('/')
+            ->with('message','Fiók sikeresen törölve!');
     }
 }

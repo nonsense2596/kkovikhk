@@ -45,6 +45,9 @@
                             @auth
                                 <a href="{{url('/deleteacc')}}" class="deletebutton">Fiók törlése</a>
                             @endauth
+                            @if(session('message'))
+                                <p>{{session('message')}}</p>
+                            @endif
                         </div>
                     </div>
                     <br><br>
@@ -58,11 +61,11 @@
     </div>
 </div>
 
-
-
-
 <script src="/js/jquery-1.7.2.js"></script>
 <script src="/js/jquery.parallax.min.js"></script>
+@if(session('message'))
+    @include('toast', array('message'=>session('message')))
+@endif
 <script>
     jQuery(document).ready(function() {
         jQuery(document.body).one('mouseenter', function() {
