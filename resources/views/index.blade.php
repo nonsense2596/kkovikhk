@@ -44,7 +44,7 @@
                             @endauth
                             @auth
                                 <div class="custom-control custom-checkbox options">
-                                    <input type="checkbox" class="custom-control-input checkbox" id="customCheck1" onclick="ohmyclick()">
+                                    <input type="checkbox" class="custom-control-input checkbox" id="customCheck1" onclick="oncheckedchange()" @if($current_user->reqmail) {!! "checked" !!} @endif>
                                     <label class="custom-control-label" for="customCheck1">E-mail új szavazásokról</label>
                                 </div>
                             @endauth
@@ -71,9 +71,18 @@
     @include('toast', array('message'=>session('message')))
 @endif
 <script>
-    function ohmyclick(){
-        alert('lol');
+    @auth
+    function oncheckedchange(value){
+        $.ajax({
+            type: 'PUT',
+            data: {_token:"{{csrf_token()}}"},
+            url: '/reqmailchange',
+            success: function(result){
+                console.log("done");
+            }
+        });
     }
+    @endauth
     jQuery(document).ready(function() {
         jQuery(document.body).one('mouseenter', function() {
             setTimeout(function() {

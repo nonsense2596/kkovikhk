@@ -27,6 +27,8 @@ Route::group(['middleware' => ['web','auth']], function (){
     Route::post('/deleteacc',[IndexController::class,'deleteaccpost']);
     Route::get('/deleteacc',[IndexController::class,'deleteaccget']);
 
+    Route::put('/reqmailchange',[IndexController::class, 'reqmailchange']);
+
     Route::group(['middleware' => 'isvotingperiod'],function(){
         Route::get('/voteselect', [IndexController::class,'voteselect']);
 

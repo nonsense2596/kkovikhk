@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\VotingPeriod;
 use Illuminate\Http\Request;
-use App\Models\Authsch\User;    // talan nem kell
+use App\Models\Authsch\User;
 use App\Http\Controllers\Controller as Controller;
 
 use Auth;
@@ -37,5 +37,11 @@ class IndexController extends Controller
 
         return redirect('/')
             ->with('message','Fiók sikeresen törölve!');
+    }
+    public function reqmailchange()
+    {
+        $current_user = Auth::user();
+        $current_user->reqmail = !$current_user->reqmail;
+        $current_user->save();
     }
 }
