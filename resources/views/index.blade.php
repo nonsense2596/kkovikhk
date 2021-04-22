@@ -65,25 +65,36 @@
     </div>
 </div>
 
+
+<div class="toastnotification" id="toastnotification"></div>
+
 <script src="/js/jquery-1.7.2.js"></script>
 <script src="/js/jquery.parallax.min.js"></script>
-@if(session('message'))
-    @include('toast', array('message'=>session('message')))
-@endif
+
+
 <script>
-    @auth
+    function showtoast(message){
+        document.getElementById("toastnotification").innerHTML = message;
+        jQuery('.toastnotification').fadeIn(400).delay(3000).fadeOut(400);
+    }
+
+    @if(session('message'))
+        showtoast("{{session('message')}}");
+    @endif
+
+
     function oncheckedchange(value){
         $.ajax({
             type: 'PUT',
             data: {_token:"{{csrf_token()}}"},
             url: '/reqmailchange',
             success: function(result){
-                console.log("done");
+                showtoast("Sikeresen módosítottad a levelezési preferenciákat!");
             }
         });
     }
-    @endauth
     jQuery(document).ready(function() {
+
         jQuery(document.body).one('mouseenter', function() {
             setTimeout(function() {
                 jQuery('.bg').animate({
