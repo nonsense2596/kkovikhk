@@ -11,14 +11,21 @@ class CallToVote extends Mailable
 {
     use Queueable, SerializesModels;
 
+    private $mailsubject;
+    private $mailbody;
+    private $displayName;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($mailsubject,$mailbody,$displayName)
     {
         //
+        $this->mailsubject = $mailsubject;
+        $this->mailbody = $mailbody;
+        $this->displayName = $displayName;
     }
 
     /**
@@ -28,6 +35,12 @@ class CallToVote extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.calltovote');
+        return $this
+            ->subject($this->mailsubject)
+            ->view('emails.calltovote')
+            ->with([
+                'mailbody' => $this->mailbody,
+                'displayName' => $this->displayName,
+            ]);
     }
 }

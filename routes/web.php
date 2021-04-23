@@ -56,7 +56,7 @@ Route::group(['middleware' => ['web','auth']], function (){
         Route::post('/deletevotesyoung',[AdminController::class, 'deletevotesyoung']);
 
         //
-        Route::post('/testmail',[AdminController::class,'testmail']);
+        Route::post('/sendmail',[AdminController::class,'sendmail']);
     });
 
 });

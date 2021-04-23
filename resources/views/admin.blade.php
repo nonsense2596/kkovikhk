@@ -144,12 +144,12 @@
                 <h3>Értesítő levél kiküldése</h3>
                 <form class="mb-2">
                     <div class="form-group">
-                        <label for="asd1">Email tárgy</label>
-                        <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12" id="asd1" value="">
+                        <label for="mailsubject">Email tárgy</label>
+                        <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12" id="mailsubject" value="">
                     </div>
                     <div class="form-group">
-                        <label for="asd2">Email szövegtörzs</label>
-                        <textarea type="text" class="form-control mr-0 mr-md-2 mt-1 col-12" id="asd2" value="" rows="3"></textarea>
+                        <label for="mailbody">Email szövegtörzs</label>
+                        <textarea type="text" class="form-control mr-0 mr-md-2 mt-1 col-12" id="mailbody" value="" rows="3"></textarea>
                     </div>
                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#sendMailModal">Emailek küldése</button>
                 </form>
@@ -210,7 +210,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Nem</button>
-                <button type="button" class="btn btn-danger" onClick="testmail()">Igen</button>
+                <button type="button" class="btn btn-danger" onClick="sendmail()">Igen</button>
             </div>
         </div>
     </div>
@@ -224,12 +224,17 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
-    function testmail()
+    function sendmail()
     {
+        var mailsubject = document.getElementById("mailsubject").value;
+        var mailbody = document.getElementById("mailbody").value;
         $.ajax({
             type: 'POST',
-            data: {_token:"{{csrf_token()}}"},
-            url: '/testmail',
+            data: {_token:"{{csrf_token()}}",mailsubject,mailbody},
+            url: '/sendmail',
+            success:function(result){
+                window.location.reload();
+            }
         });
     }
 </script>

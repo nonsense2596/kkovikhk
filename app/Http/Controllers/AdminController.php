@@ -21,13 +21,17 @@ use App\Models\VotingPeriod;
 class AdminController extends Controller
 {
 
-    public function testmail()
+    public function sendmail()
     {
+        $mailsubject = request('mailsubject');
+        $mailbody = request('mailbody');
+
         $users = User::where('reqmail',true)->get();
+        // TODO vannak queuek is a laravelben, hasznalni kene
         foreach($users as $user){
             usleep(100000);
             Mail::to($user->mail)
-                ->send(new CallToVote());
+                ->send(new CallToVote($mailsubject,$mailbody,$user->displayName));
         }
 
     }
