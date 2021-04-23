@@ -137,9 +137,34 @@
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteVotesYoungModal">Fiatal oktató szavazatok törlése</button>
             </div>
         </div>
+
+        <br>
+        <div class="row">
+            <div class="col-12">
+                <h3>Értesítő levél kiküldése</h3>
+                <form class="mb-2">
+                    <div class="form-group">
+                        <label for="asd1">Email tárgy</label>
+                        <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12" id="asd1" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="asd2">Email szövegtörzs</label>
+                        <textarea type="text" class="form-control mr-0 mr-md-2 mt-1 col-12" id="asd2" value="" rows="3"></textarea>
+                    </div>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#sendMailModal">Emailek küldése</button>
+                </form>
+            </div>
+        </div>
+
     </div>
+
     <div class="footer-spacer"></div>
+
 </div>
+
+
+
+
 
 <!-- Modal -->
 <div class="modal fade" id="deleteVotesModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -174,6 +199,22 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="sendMailModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Biztos ki akarsz küldeni baszom sok levelet?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Nem</button>
+                <button type="button" class="btn btn-danger" onClick="testmail()">Igen</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -182,6 +223,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<script>
+    function testmail()
+    {
+        $.ajax({
+            type: 'POST',
+            data: {_token:"{{csrf_token()}}"},
+            url: '/testmail',
+        });
+    }
+</script>
 <script>
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawChart);

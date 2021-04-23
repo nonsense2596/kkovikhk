@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller as Controller;
+use App\Mail\CallToVote;
 use App\Models\Teacher;
 use App\Models\YoungTeacher;
 use App\Models\Vote;
 use App\Models\YoungVote;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
+use App\Models\Authsch\User;
 
 use Auth;
 use Illuminate\Support\Facades\Log;
@@ -17,6 +20,18 @@ use App\Models\VotingPeriod;
 
 class AdminController extends Controller
 {
+
+    public function testmail()
+    {
+        $users = User::where('reqmail',true)->get();
+        foreach($users as $user){
+            usleep(100000);
+            Mail::to($user->mail)
+                ->send(new CallToVote());
+        }
+
+    }
+
     // todo gates to global function
     public function admin()
     {
