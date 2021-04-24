@@ -34,7 +34,7 @@ class VoteController extends Controller
         $vote = $request["name"];
         $num_of_teachers = count(Teacher::all());
 
-        if($vote<=0 || $vote>$num_of_teachers)  // fix to if id exists
+        if($vote<=0 || $vote>$num_of_teachers)  // TODO fix to if id exists
             return redirect('/vote');
 
         $new_vote = new Vote([

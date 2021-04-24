@@ -14,18 +14,26 @@ class CallToVote extends Mailable
     private $mailsubject;
     private $mailbody;
     private $displayName;
+    private $mailaddress;
+    private $unsubuuid;
+
+    private $unsuburl;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($mailsubject,$mailbody,$displayName)
+    public function __construct($mailsubject,$mailbody,$displayName,$mailaddress,$unsubuuid)
     {
         //
         $this->mailsubject = $mailsubject;
         $this->mailbody = $mailbody;
         $this->displayName = $displayName;
+        $this->mailaddress = $mailaddress;
+        $this->unsubuuid = $unsubuuid;
+
+        $this->unsuburl = url('/unsubscribe/'.urlencode($this->mailaddress).'/'.$unsubuuid);
     }
 
     /**
@@ -41,6 +49,7 @@ class CallToVote extends Mailable
             ->with([
                 'mailbody' => $this->mailbody,
                 'displayName' => $this->displayName,
+                'unsuburl' => $this->unsuburl,
             ]);
     }
 }

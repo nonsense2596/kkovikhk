@@ -64,3 +64,17 @@ Route::group(['middleware' => ['web','auth']], function (){
 Route::get('/auth/schonherz', [SocialController::class, 'schonherzRedirect'])->name('login');
 Route::get('/auth/schonherz/callback', [SocialController::class, 'loginWithSchonherz']);
 Route::get('/auth/schonherz/logout',[SocialController::class, 'logOutOfSchonherz']);
+
+Route::get('/unsubscribe/{mail}/{uuid}',[IndexController::class, 'unsubscribe']);
+
+
+Route::get('/test', function(){
+    //dd(urlencode("ká@asd>"));
+    return view('emails.calltovote')
+        ->with([
+            'mailbody' => 'asd',
+            'displayName' => 'kek',
+            'mailaddress' => 'szatmary.peter@gmail.com',
+            'unsuburl' => 'asd',
+        ]);
+});

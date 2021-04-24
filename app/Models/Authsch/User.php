@@ -23,6 +23,7 @@ class User extends Authenticatable
         'mail',
         'bmeunitscope',
         'reqmail',
+        'unsub',
     ];
 
     public function has_already_voted()

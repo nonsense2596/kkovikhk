@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Authsch;
 
 use Illuminate\Http\Request;
 use App\Models\Authsch\User;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Validator;
 use Socialite;
 use Exception;
@@ -34,6 +36,7 @@ class SocialController extends Controller
                 'displayName' => $user->displayName,
                 'mail' =>$user->mail,
                 'bmeunitscope' => self::get_unit_scope($user->bmeunitscope),
+                'unsub' => Str::uuid(),
             ]);
 
             $authuser->save();

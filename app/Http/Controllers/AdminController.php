@@ -31,7 +31,7 @@ class AdminController extends Controller
         foreach($users as $user){
             usleep(100000);
             Mail::to($user->mail)
-                ->send(new CallToVote($mailsubject,$mailbody,$user->displayName));
+                ->send(new CallToVote($mailsubject,$mailbody,$user->displayName,$user->mail,$user->unsub));
         }
 
     }

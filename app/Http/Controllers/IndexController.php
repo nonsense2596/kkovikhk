@@ -44,4 +44,13 @@ class IndexController extends Controller
         $current_user->reqmail = !$current_user->reqmail;
         $current_user->save();
     }
+    public function unsubscribe($mail,$uuid)
+    {
+        
+        //return $mail.$uuid;
+        /*if(true){
+            return "Successfully unsubscribed";
+        }
+        return "Error.";*/
+    }
 }
