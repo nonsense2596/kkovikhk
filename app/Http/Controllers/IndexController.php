@@ -46,11 +46,17 @@ class IndexController extends Controller
     }
     public function unsubscribe($mail,$uuid)
     {
-        
-        //return $mail.$uuid;
-        /*if(true){
+        $usertounsub = User::where([
+            ['mail',$mail],
+            ['unsub',$uuid]
+        ])->first();
+
+        if($usertounsub!=null){
+            $usertounsub->reqmail=0;
+            $usertounsub->unsub=null;
+            $usertounsub->save();
             return "Successfully unsubscribed";
         }
-        return "Error.";*/
+        else return "There was a problem with your unsubscribe link.";
     }
 }
