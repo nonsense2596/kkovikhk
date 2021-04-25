@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="{{url('/css/admin.css')}}">
 </head>
 <body>
+@foreach($asd as $key => $value)
+    {{$key+1}}:
+    @foreach($value as $valu)
+        {{$valu}}
+    @endforeach
+    <br>
+@endforeach
 <div class="container-fluid content">
     <div class="container">
         <div class="row">
@@ -109,6 +116,13 @@
                         <li><b>{{$votecount->name}}</b>: {{$votecount->count}}</li>
                     @endforeach
                 </ul>
+            </div>
+        </div>
+        <!-- line chart -->
+        <div class="row">
+            <div class="col-12">
+                <h3>Szavazlatok megoszlása idővel</h3>
+                <div id="linechart_material"></div>
             </div>
         </div>
         <!-- pie charts v2 -->
@@ -282,6 +296,52 @@
         var chart = new google.visualization.PieChart(document.getElementById('piechartyoung'));
 
         chart.draw(data, options);
+    }
+</script>
+<script>
+    google.charts.load('current', {'packages':['line']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'Day');
+        // data.addColumn('number', 'Guardians of the Galaxy');
+        // data.addColumn('number', 'The Avengers');
+        // data.addColumn('number', 'Transformers: Age of Extinction');
+        @foreach($teachers as $teacher)
+        data.addColumn('number','{{$teacher->name}}');
+        @endforeach
+        data.addRows([
+            [0,  0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+{{--            @for($i = 1; $i <= $numofdays; $i++)--}}
+{{--            [{{$i}},  1, 2, 3, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0],--}}
+{{--            @endfor--}}
+
+{{--            @foreach($asd as $key => $value)--}}
+{{--            @@endforeach--}}
+            @foreach($asd as $key => $value)
+            [{{$key+1}},
+            @foreach($value as $valu)
+            {{$valu}},
+            @endforeach
+            ],
+            @endforeach
+        ]);
+
+        var options = {
+            chart: {
+                title: 'Szavazatok megoszlása idővel',
+            },
+            width: 1000,
+            height: 500,
+            backgroundColor: { 'fill': '#343A40', 'fillOpacity': 0.001 },
+            chartArea: { 'backgroundColor': { 'fill': '#343A40', 'fillOpacity': 0.001 }},
+        };
+
+        var chart = new google.charts.Line(document.getElementById('linechart_material'));
+
+        chart.draw(data, google.charts.Line.convertOptions(options));
     }
 </script>
 <script>

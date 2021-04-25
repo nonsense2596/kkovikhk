@@ -8,6 +8,9 @@ use App\Models\Teacher;
 use App\Models\YoungTeacher;
 use App\Models\Vote;
 use App\Models\YoungVote;
+use DateInterval;
+use DatePeriod;
+use DateTime;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
@@ -62,7 +65,33 @@ class AdminController extends Controller
         $votingperiod = VotingPeriod::getVotingPeriodOrInit();
 
         $uniquevotenum = $this->countunique();
-        //if(date('Y-m-d')<)
+
+        $numofdays = ((strtotime($votingperiod->end)-strtotime($votingperiod->start))/(60*60*24))+1;
+        //ddd((strtotime($votingperiod->end)-strtotime($votingperiod->start)) / (60 * 60 * 24) +1);
+
+        $period = new DatePeriod(
+            new DateTime($votingperiod->start),
+            new DateInterval('P1D'),
+            new DateTime(date('Y-m-d',strtotime($votingperiod->end.' + 1 days'))),
+        );
+        $asd = null;
+        foreach ($period as $key => $value) {
+            //$value->format('Y-m-d')
+            //$asd.=$value->format('Y-m-d');
+            // itt akkor megvan minden nap egyesevel
+            // meg kell fogni minden tanart egyesevel ($teachers)
+            // es meg kell nezni, hogy adott nap hany volt ra a szavazasi tablaban
+
+            foreach($teachers as $key2 => $teacher){
+                $datestring = date('Y-m-d',$value->getTimestamp());
+                $count = Vote::where('created_at','like', '%'.$datestring.'%')->where('teacher_id',$teacher->id)->count();//->count();
+                if($key==0)
+                    $asd[$key][$key2]=$count;
+                else
+                    $asd[$key][$key2]=$asd[$key-1][$key2]+$count;
+            }
+        }
+        //ddd($asd);
 
         return view("admin", compact(
             'current_user',
@@ -73,7 +102,9 @@ class AdminController extends Controller
             'votecountsyoung',
             'votenum',
             'votenumyoung',
-            'uniquevotenum'
+            'uniquevotenum',
+            'numofdays',
+            'asd',
         ));
     }
 
