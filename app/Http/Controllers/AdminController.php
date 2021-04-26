@@ -76,12 +76,6 @@ class AdminController extends Controller
         );
         $asd = null;
         foreach ($period as $key => $value) {
-            //$value->format('Y-m-d')
-            //$asd.=$value->format('Y-m-d');
-            // itt akkor megvan minden nap egyesevel
-            // meg kell fogni minden tanart egyesevel ($teachers)
-            // es meg kell nezni, hogy adott nap hany volt ra a szavazasi tablaban
-
             foreach($teachers as $key2 => $teacher){
                 $datestring = date('Y-m-d',$value->getTimestamp());
                 $count = Vote::where('created_at','like', '%'.$datestring.'%')->where('teacher_id',$teacher->id)->count();//->count();
@@ -92,6 +86,18 @@ class AdminController extends Controller
             }
         }
         //ddd($asd);
+
+        $asd2 = null;
+        foreach ($period as $key => $value) {
+            foreach($teachers_young as $key2 => $teacher){
+                $datestring = date('Y-m-d',$value->getTimestamp());
+                $count = YoungVote::where('created_at','like', '%'.$datestring.'%')->where('teacher_id',$teacher->id)->count();//->count();
+                if($key==0)
+                    $asd2[$key][$key2]=$count;
+                else
+                    $asd2[$key][$key2]=$asd2[$key-1][$key2]+$count;
+            }
+        }
 
         return view("admin", compact(
             'current_user',
@@ -105,6 +111,7 @@ class AdminController extends Controller
             'uniquevotenum',
             'numofdays',
             'asd',
+            'asd2',
         ));
     }
 
