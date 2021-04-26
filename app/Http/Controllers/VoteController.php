@@ -32,10 +32,10 @@ class VoteController extends Controller
 
         $request = \request(['name']);
         $vote = $request["name"];
-        $num_of_teachers = count(Teacher::all());
 
-        if($vote<=0 || $vote>$num_of_teachers)  // TODO fix to if id exists
-            return redirect('/vote');
+        if(!Teacher::where('id',$vote)){
+            return redirect("/vote");
+        }
 
         $new_vote = new Vote([
             'user_id' => $current_user->id,
@@ -43,7 +43,7 @@ class VoteController extends Controller
         ]);
         $new_vote->save();
 
-        return redirect('/');
+        return redirect('/voteselect');
     }
 
     public function youngvote()
@@ -65,10 +65,10 @@ class VoteController extends Controller
 
         $request = \request(['name']);
         $vote = $request["name"];
-        $num_of_teachers = count(YoungTeacher::all());
 
-        if($vote<=0 || $vote>$num_of_teachers) // fix to if id exists
-            return redirect('/vote');
+        if(!YoungTeacher::where('id',$vote)){
+            return redirect("/youngvote");
+        }
 
         $new_vote = new YoungVote([
             'user_id' => $current_user->id,
