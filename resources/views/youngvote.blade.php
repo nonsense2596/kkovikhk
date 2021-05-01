@@ -23,7 +23,7 @@
                 @csrf
                 @foreach($teachers as $teacher)
                     <label>
-                        <input type="radio" name="name" class="card-input-element d-none" value="{{$teacher->id}}">
+                        <input type="radio" name="id" class="card-input-element d-none" value="{{$teacher->id}}">
                         <div class="card d-flex flex-row justify-content-between">
                             <div class="card-body my-card-header">
                                 {{$teacher->name}}

@@ -26,12 +26,11 @@ class VoteController extends Controller
 
     public function votepost(){
         $current_user = Auth::user();
-        $already_voted = $current_user->has_already_voted();
-        if($already_voted)
+        if($current_user->has_already_voted())
             abort(403,"already voted ya cake");
 
-        $request = \request(['name']);
-        $vote = $request["name"];
+        $request = \request(['id']);
+        $vote = (int)$request["id"];
 
         if(!Teacher::where('id',$vote)){
             return redirect("/vote");
@@ -59,12 +58,11 @@ class VoteController extends Controller
 
     public function youngvotepost(){
         $current_user = Auth::user();
-        $already_voted = $current_user->has_already_voted_young();
-        if($already_voted)
+        if($current_user->has_already_voted_young())
             abort(403,"already voted ya cakee");
 
-        $request = \request(['name']);
-        $vote = $request["name"];
+        $request = \request(['id']);
+        $vote = (int)$request["id"];
 
         if(!YoungTeacher::where('id',$vote)){
             return redirect("/youngvote");
