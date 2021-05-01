@@ -18,7 +18,7 @@ class VoteController extends Controller
         $current_user = Auth::user();
         $already_voted = $current_user->has_already_voted();
         if($already_voted)
-            abort(403,"already voted ya nugget");
+            abort(403,"Már szavaztál");
 
         $teachers = Teacher::all();
         return view('vote',compact('teachers'));
@@ -27,7 +27,7 @@ class VoteController extends Controller
     public function votepost(){
         $current_user = Auth::user();
         if($current_user->has_already_voted())
-            abort(403,"already voted ya cake");
+            abort(403,"Már szavaztál");
 
         $request = \request(['id']);
         $vote = (int)$request["id"];
@@ -50,7 +50,7 @@ class VoteController extends Controller
         $current_user = Auth::user();
         $already_voted = $current_user->has_already_voted_young();
         if($already_voted)
-            abort(403,"already voted ya nugget");
+            abort(403,"Már szavaztál");
 
         $teachers = YoungTeacher::all();
         return view('youngvote',compact('teachers'));
@@ -59,7 +59,7 @@ class VoteController extends Controller
     public function youngvotepost(){
         $current_user = Auth::user();
         if($current_user->has_already_voted_young())
-            abort(403,"already voted ya cakee");
+            abort(403,"Már szavaztál");
 
         $request = \request(['id']);
         $vote = (int)$request["id"];
