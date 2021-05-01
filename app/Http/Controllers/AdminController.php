@@ -42,13 +42,7 @@ class AdminController extends Controller
     // todo gates to global function
     public function admin()
     {
-        /*if(!Gate::allows('admin')){
-            abort(403);
-        }*/
-        // test date arithmetics
-        //dd([date('Y-m-d'),date('Y-m-d',strtotime('+1 days'))]);
 
-        // test date arithmetics
         $current_user = Auth::user();
 
         $votecounts = $this->countvotes()->sortByDesc("count");
@@ -67,12 +61,19 @@ class AdminController extends Controller
         $uniquevotenum = $this->countunique();
 
         $numofdays = ((strtotime($votingperiod->end)-strtotime($votingperiod->start))/(60*60*24))+1;
-        //ddd((strtotime($votingperiod->end)-strtotime($votingperiod->start)) / (60 * 60 * 24) +1);
+
+
+
+        $enddate = date('Y-m-d',strtotime($votingperiod->end.' + 1 days'));
+        $today = date('Y-m-d',strtotime(date('Y-m-d').' + 1 days'));
+        if($enddate>$today){
+            $enddate = $today;
+        }
 
         $period = new DatePeriod(
             new DateTime($votingperiod->start),
             new DateInterval('P1D'),
-            new DateTime(date('Y-m-d',strtotime($votingperiod->end.' + 1 days'))),
+            new DateTime($enddate),
         );
         $asd = null;
         foreach ($period as $key => $value) {
