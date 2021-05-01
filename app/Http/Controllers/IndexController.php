@@ -8,6 +8,7 @@ use App\Models\Authsch\User;
 use App\Http\Controllers\Controller as Controller;
 
 use Auth;
+use Illuminate\Support\Str;
 
 class IndexController extends Controller
 {
@@ -42,6 +43,9 @@ class IndexController extends Controller
     {
         $current_user = Auth::user();
         $current_user->reqmail = !$current_user->reqmail;
+        if($current_user->reqmail)
+            $current_user->unsub = Str::uuid();
+
         $current_user->save();
     }
     public function unsubscribe($mail,$uuid)
