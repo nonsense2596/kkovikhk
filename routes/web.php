@@ -72,8 +72,8 @@ Route::get('/test', function(){
     //dd(urlencode("ká@asd>"));
     return view('emails.calltovote')
         ->with([
-            'mailbody' => 'asd',
-            'displayName' => 'kek',
+            'mailbody' => 'asd<a href="https://google.com">asd</a>',
+            'displayName' => 'Gipsz Jakab',
             'mailaddress' => 'szatmary.peter@gmail.com',
             'unsuburl' => 'asd',
         ]);
