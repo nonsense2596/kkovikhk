@@ -162,7 +162,8 @@
                         <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12" id="mailsubject" value="">
                     </div>
                     <div class="form-group">
-                        <label for="mailbody">Email szövegtörzs (A levél automatikusan Kedves XY-nal kezdődik, azt kihagyhatod)</label>
+                        <label for="mailbody">Email szövegtörzs (A levél automatikusan Kedves XY-nal kezdődik, azt kihagyhatod, különben meg standard szöveget, és HTML-t eszik meg. Bootstrap inkludálva van a levélben.)
+                            <br>Így néz ki: <a href="{{url('/imgs/minta.png')}}">[link]</a></label>
                         <textarea type="text" class="form-control mr-0 mr-md-2 mt-1 col-12" id="mailbody" value="" rows="3"></textarea>
                     </div>
                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#sendMailModal">Emailek küldése</button>
