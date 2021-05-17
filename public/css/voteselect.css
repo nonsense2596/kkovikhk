@@ -6,11 +6,11 @@ a:hover{
 }
 
 #img-left{
-    background-image: url('/imgs/2c.jpg');
+    background-image: url('/imgs/omikk.jpg');
 }
 
 #img-right{
-    background-image: url('/imgs/4c.jpg');
+    background-image: url('/imgs/bmeq.jpg');
 }
 
 .alreadyvoted{
@@ -41,10 +41,10 @@ a:hover{
 }
 
 .img-title {
-    opacity: 0.3;
+    opacity: 0.7;
     transition: .5s;
     color: white;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.7);
     position: relative;
     width: 100%;
     margin-top: auto;
@@ -62,6 +62,7 @@ a:hover{
 
 .img-box:hover .img-title {
     opacity: 1;
+    background-color: rgba(0,0,0,0.9);
 }
 
 .asd{
