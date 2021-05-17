@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>asd</title>
+    <title>KKO | Fiók törlése</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -25,7 +25,7 @@
                     <br><br>
                         <form action="/deleteacc" method="POST" class="btn-group" role="group">
                             @csrf
-                            <button type="submit" class="btn btn-outline-danger">asd</button>
+                            <button type="submit" class="btn btn-outline-danger">Igen</button>
                             <a href="{{ url('/')}}" class="btn btn-outline-secondary">Nem</a>
                         </form>
                 </div>
