@@ -311,7 +311,7 @@
         data.addColumn('number','{{$teacher->name}}');
         @endforeach
         data.addRows([
-            [0,  0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], // TODO EZT IS DINAMIKUSRA
+            [0,  @for($i = 0; $i < $teachers->count(); $i++){!! "0.0," !!}@endfor], // TODO EZT IS DINAMIKUSRA
             @foreach($asd as $key => $value)
             [{{$key+1}},
             @foreach($value as $valu)
@@ -348,7 +348,7 @@
         data.addColumn('number','{{$teacher->name}}');
         @endforeach
         data.addRows([
-            [0,  0.0, 0.0, 0.0],    // TODO EZT IS DINAMIKUSRA
+            [0,  @for($i = 0; $i < $teachers_young->count(); $i++){!! "0.0," !!}@endfor],    // TODO EZT IS DINAMIKUSRA
                 @foreach($asd2 as $key => $value)
             [{{$key+1}},
                 @foreach($value as $valu)
