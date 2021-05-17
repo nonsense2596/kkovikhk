@@ -344,9 +344,6 @@
 
         var data = new google.visualization.DataTable();
         data.addColumn('number', 'Day');
-        // data.addColumn('number', 'Guardians of the Galaxy');
-        // data.addColumn('number', 'The Avengers');
-        // data.addColumn('number', 'Transformers: Age of Extinction');
         @foreach($teachers_young as $teacher)
         data.addColumn('number','{{$teacher->name}}');
         @endforeach
@@ -384,7 +381,6 @@
             data: {_token:"{{csrf_token()}}"},
             url: '/deletevotes',
             success: function(result){
-                //$("#deleteVotesModal").modal('hide');
                 window.location.reload();
             }
         });
@@ -397,7 +393,6 @@
             data: {_token:"{{csrf_token()}}"},
             url: '/deletevotesyoung',
             success: function(result){
-                //$("#deleteVotesYoungModal").modal('hide');
                 window.location.reload();
             }
         });
@@ -465,7 +460,6 @@
             },
         });
     }
-    // /////////////////////////////////////
     function modifyTeacherYoung(param){
         var teacherid = param.dataset.index;
         var teachername = document.getElementById("name"+teacherid+"young").value;
