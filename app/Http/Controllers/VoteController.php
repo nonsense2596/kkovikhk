@@ -24,13 +24,16 @@ class VoteController extends Controller
         return view('vote',compact('teachers'));
     }
 
-    public function votepost(){
+    public function votepost(Request $request){
         $current_user = Auth::user();
         if($current_user->has_already_voted())
             abort(403,"Már szavaztál");
 
-        $request = \request(['id']);
-        $vote = (int)$request["id"];
+        $validated = $request->validate([
+            'id' => 'required',
+        ]);
+
+        $vote = (int)$validated["id"];
 
         if(!Teacher::where('id',$vote)){
             return redirect("/vote");
@@ -56,13 +59,16 @@ class VoteController extends Controller
         return view('youngvote',compact('teachers'));
     }
 
-    public function youngvotepost(){
+    public function youngvotepost(Request $request){
         $current_user = Auth::user();
         if($current_user->has_already_voted_young())
             abort(403,"Már szavaztál");
 
-        $request = \request(['id']);
-        $vote = (int)$request["id"];
+        $validated = $request->validate([
+           'id' => 'required',
+        ]);
+
+        $vote = (int)$validated["id"];
 
         if(!YoungTeacher::where('id',$vote)){
             return redirect("/youngvote");

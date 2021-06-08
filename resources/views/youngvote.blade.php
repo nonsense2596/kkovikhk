@@ -18,6 +18,11 @@
         <div class="row">
             <h1>Kar Kiváló Fiatal Oktatója</h1>
         </div>
+        @if ($errors->any())
+            <div class="row alert alert-danger">
+                <h5 class="text-dark">Helytelen szavazat, kérlek szavazz újra!</h5>
+            </div>
+        @endif
         <div class="row">
             <form method="POST" action="/youngvote" id="form1">
                 @csrf
