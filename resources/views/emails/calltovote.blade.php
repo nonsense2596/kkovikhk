@@ -22,7 +22,7 @@
             {!! $mailbody !!}
             <p>Üdvözlettel,<br>
                 A VIK HK csapata</p>
-            <img src="{{url('/imgs/vikhk.png')}}" style="width:60px; height: 90px;">
+            <img src="{{$message->embed(public_path() . '/imgs/vikhk.png')}}" style="width:60px; height: 90px;">
         </td>
     </tr>
     <tr>
