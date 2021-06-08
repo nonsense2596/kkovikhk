@@ -54,8 +54,8 @@
         </a>
     </div>
 
-    <script src="jquery-1.7.2.js"></script>
-    <script src="jquery.parallax.min.js"></script>
+    <script src="js/jquery-1.7.2.js"></script>
+    <script src="js/jquery.parallax.min.js"></script>
 </body>
 
 </html>
