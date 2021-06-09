@@ -29,7 +29,7 @@ class KkoPolicy extends Basic
                 'http://localhost:8000',
                 'https://kko.vik.hk',
                 'http://kko.vik.hk',
-                'data:'
+                'data:',
             ])
             ->addDirective(Directive::MEDIA, Keyword::SELF)
             ->addDirective(Directive::FONT,[

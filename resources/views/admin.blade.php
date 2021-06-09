@@ -307,6 +307,7 @@
 
         var data = new google.visualization.DataTable();
         data.addColumn('number', 'Day');
+        @if(!empty($teachers) && !is_null($asd))
         @foreach($teachers as $teacher)
         data.addColumn('number','{{$teacher->name}}');
         @endforeach
@@ -318,7 +319,8 @@
             {{$valu}},
             @endforeach
             ],
-            @endforeach
+        @endforeach
+        @endif
         ]);
 
         var options = {
@@ -344,6 +346,7 @@
 
         var data = new google.visualization.DataTable();
         data.addColumn('number', 'Day');
+        @if(!empty($teachers_young) && !is_null($asd2))
         @foreach($teachers_young as $teacher)
         data.addColumn('number','{{$teacher->name}}');
         @endforeach
@@ -355,7 +358,8 @@
                 {{$valu}},
                 @endforeach
             ],
-            @endforeach
+        @endforeach
+        @endif
         ]);
 
         var options = {
