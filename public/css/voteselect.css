@@ -9,6 +9,10 @@ a:hover{
     background-image: url('/imgs/omikk.jpg');
 }
 
+#img-mid{
+    background-image: url('/imgs/qep.jpg');
+}
+
 #img-right{
     background-image: url('/imgs/bmeq.jpg');
 }
@@ -80,7 +84,7 @@ a:hover{
         overflow: hidden;
     }
     .img-box {
-        height: 50%;
+        height: 33%;
         opacity: 1;
     }
     .img-title {

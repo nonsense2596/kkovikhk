@@ -41,6 +41,17 @@
                 @endif
             </div>
         </a>
+        <a class="img-box" id="img-mid" @if(!$already_voted_erasmus)href="{{url('/erasmusvote')}}"@endif>
+            <div class="img-title">
+                Kar Kiváló Erasmus Oktatója
+                <br>
+                @if($already_voted_erasmus)
+                    <span class="alreadyvoted">
+                        (már szavaztál)
+                    </span>
+                @endif
+            </div>
+        </a>
         <a class="img-box" id="img-right" @if(!$already_voted_young)href="{{url('/youngvote')}}"@endif>
             <div class="img-title">
                 Kar Kiváló Fiatal Oktatója

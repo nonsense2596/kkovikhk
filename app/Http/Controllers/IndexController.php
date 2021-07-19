@@ -23,7 +23,8 @@ class IndexController extends Controller
         $current_user = Auth::user();
         $already_voted = $current_user->has_already_voted();
         $already_voted_young = $current_user->has_already_voted_young();
-        return view("voteselect", compact('already_voted','already_voted_young'));
+        $already_voted_erasmus = $current_user->has_already_voted_erasmus();
+        return view("voteselect", compact('already_voted','already_voted_young', 'already_voted_erasmus'));
     }
     public function deleteaccget()
     {

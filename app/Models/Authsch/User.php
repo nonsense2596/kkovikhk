@@ -3,6 +3,7 @@
 namespace App\Models\Authsch;
 
 //use Illuminate\Contracts\Auth\Authenticatable;
+use App\Models\ErasmusVote;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -33,6 +34,10 @@ class User extends Authenticatable
     public function has_already_voted_young()
     {
         return $this->hasMany(YoungVote::class)->count()>0;
+    }
+    public function has_already_voted_erasmus()
+    {
+        return $this->hasMany(ErasmusVote::class)->count()>0;
     }
 
 
