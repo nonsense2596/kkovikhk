@@ -34,8 +34,12 @@ Route::group(['middleware' => ['web','auth']], function (){
 
         Route::get('/vote', [VoteController::class, 'vote']);
         Route::post('/vote', [VoteController::class, 'votepost']);
+
         Route::get('/youngvote', [VoteController::class, 'youngvote']);
         Route::post('/youngvote', [VoteController::class, 'youngvotepost']);
+
+        Route::get('/erasmusvote', [VoteController::class, 'erasmusvote']);
+        Route::post('/erasmusvote', [VoteController::class, 'erasmusvotepost']);
     });
 
     Route::group(['middleware' => 'isadmin'],function(){
@@ -49,11 +53,16 @@ Route::group(['middleware' => ['web','auth']], function (){
         Route::post('/deleteteacheryoung', [AdminController::class, 'deleteteacheryoung']);
         Route::post('/modifyteacheryoung',[AdminController::class, 'modifyteacheryoung']);
 
+        Route::post('/addteachererasmus',[AdminController::class, 'addteachererasmus']);
+        Route::post('/deleteteachererasmus', [AdminController::class, 'deleteteachererasmus']);
+        Route::post('/modifyteachererasmus',[AdminController::class, 'modifyteachererasmus']);
+
         Route::post('/setvotingperiod',[AdminController::class, 'setvotingperiod']);
         Route::post('/endvotingperiod',[AdminController::class, 'endvotingperiod']);
 
         Route::post('/deletevotes',[AdminController::class, 'deletevotes']);
         Route::post('/deletevotesyoung',[AdminController::class, 'deletevotesyoung']);
+        Route::post('/deletevoteserasmus',[AdminController::class, 'deletevoteserasmus']);
 
         //
         Route::post('/sendmail',[AdminController::class,'sendmail']);

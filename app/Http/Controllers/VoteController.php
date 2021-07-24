@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ErasmusTeacher;
 use App\Models\Teacher;
 use App\Models\YoungTeacher;
 use App\Models\Vote;
 use App\Models\YoungVote;
+use App\Models\ErasmusVote;
 use Illuminate\Http\Request;
 
 use Auth;
@@ -75,6 +77,41 @@ class VoteController extends Controller
         }
 
         $new_vote = new YoungVote([
+            'user_id' => $current_user->id,
+            'teacher_id' => $vote,
+        ]);
+        $new_vote->save();
+
+        return redirect('/');
+    }
+
+    public function erasmusvote()
+    {
+        $current_user = Auth::user();
+        $already_voted = $current_user->has_already_voted_erasmus();
+        if($already_voted)
+            abort(403,"Már szavaztál");
+
+        $teachers = ErasmusTeacher::all();
+        return view('erasmusvote',compact('teachers'));
+    }
+
+    public function erasmusvotepost(Request $request){
+        $current_user = Auth::user();
+        if($current_user->has_already_voted_erasmus())
+            abort(403,"Már szavaztál");
+
+        $validated = $request->validate([
+            'id' => 'required',
+        ]);
+
+        $vote = (int)$validated["id"];
+
+        if(!ErasmusTeacher::where('id',$vote)){
+            return redirect("/erasmusvote");
+        }
+
+        $new_vote = new ErasmusVote([
             'user_id' => $current_user->id,
             'teacher_id' => $vote,
         ]);
