@@ -12,12 +12,10 @@ use DateInterval;
 use DatePeriod;
 use DateTime;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Authsch\User;
 
 use Auth;
-use Illuminate\Support\Facades\Log;
 
 use App\Models\VotingPeriod;
 
@@ -29,20 +27,18 @@ class AdminController extends Controller
         $mailsubject = request('mailsubject');
         $mailbody = request('mailbody');
 
-        $users = User::where('reqmail',true)->get();
+        $users = User::where('reqmail', true)->get();
         // TODO vannak queuek is a laravelben, hasznalni kene
-        foreach($users as $user){
+        foreach ($users as $user) {
             usleep(100000);
             Mail::to($user->mail)
-                ->send(new CallToVote($mailsubject,$mailbody,$user->displayName,$user->mail,$user->unsub));
+                ->send(new CallToVote($mailsubject, $mailbody, $user->displayName, $user->mail, $user->unsub));
         }
-
     }
 
     // todo gates to global function
     public function admin()
     {
-
         $current_user = Auth::user();
 
         $votecounts = $this->countvotes()->sortByDesc("count");
@@ -60,13 +56,11 @@ class AdminController extends Controller
 
         $uniquevotenum = $this->countunique();
 
-        $numofdays = ((strtotime($votingperiod->end)-strtotime($votingperiod->start))/(60*60*24))+1;
+        $numofdays = ((strtotime($votingperiod->end) - strtotime($votingperiod->start)) / (60 * 60 * 24)) + 1;
 
-
-
-        $enddate = date('Y-m-d',strtotime($votingperiod->end.' + 1 days'));
-        $today = date('Y-m-d',strtotime(date('Y-m-d').' + 1 days'));
-        if($enddate>$today){
+        $enddate = date('Y-m-d', strtotime($votingperiod->end . ' + 1 days'));
+        $today = date('Y-m-d', strtotime(date('Y-m-d') . ' + 1 days'));
+        if ($enddate > $today) {
             $enddate = $today;
         }
 
@@ -75,28 +69,28 @@ class AdminController extends Controller
             new DateInterval('P1D'),
             new DateTime($enddate),
         );
-        $asd = null;
-        foreach ($period as $key => $value) {
-            foreach($teachers as $key2 => $teacher){
-                $datestring = date('Y-m-d',$value->getTimestamp());
-                $count = Vote::where('created_at','like', '%'.$datestring.'%')->where('teacher_id',$teacher->id)->count();//->count();
-                if($key==0)
-                    $asd[$key][$key2]=$count;
+
+        $vote_distribution = [];
+        foreach ($period as $day_index => $day) {
+            foreach ($teachers as $teacher_index => $teacher) {
+                $datestring = date('Y-m-d', $day->getTimestamp());
+                $count = Vote::where('created_at', 'like', '%' . $datestring . '%')->where('teacher_id', $teacher->id)->count();
+                if ($day_index == 0)
+                    $vote_distribution[$day_index][$teacher_index] = $count;
                 else
-                    $asd[$key][$key2]=$asd[$key-1][$key2]+$count;
+                    $vote_distribution[$day_index][$teacher_index] = $vote_distribution[$day_index - 1][$teacher_index] + $count;
             }
         }
-        //ddd($asd);
 
-        $asd2 = null;
-        foreach ($period as $key => $value) {
-            foreach($teachers_young as $key2 => $teacher){
-                $datestring = date('Y-m-d',$value->getTimestamp());
-                $count = YoungVote::where('created_at','like', '%'.$datestring.'%')->where('teacher_id',$teacher->id)->count();//->count();
-                if($key==0)
-                    $asd2[$key][$key2]=$count;
+        $young_vote_distribution = [];
+        foreach ($period as $day_index => $day) {
+            foreach ($teachers_young as $teacher_index => $teacher) {
+                $datestring = date('Y-m-d', $day->getTimestamp());
+                $count = YoungVote::where('created_at', 'like', '%' . $datestring . '%')->where('teacher_id', $teacher->id)->count();
+                if ($day_index == 0)
+                    $young_vote_distribution[$day_index][$teacher_index] = $count;
                 else
-                    $asd2[$key][$key2]=$asd2[$key-1][$key2]+$count;
+                    $young_vote_distribution[$day_index][$teacher_index] = $young_vote_distribution[$day_index - 1][$teacher_index] + $count;
             }
         }
 
@@ -111,27 +105,23 @@ class AdminController extends Controller
             'votenumyoung',
             'uniquevotenum',
             'numofdays',
-            'asd',
-            'asd2',
+            'vote_distribution',
+            'young_vote_distribution',
         ));
     }
 
     public function setvotingperiod()
     {
-       /* if(!Gate::allows('admin')){
-            abort(403);
-        }*/
         // if does not have any row, add one
         // else get one (there should be only one, ever)
         // and update it
         $startdate = request("startdate");
         $enddate = request("enddate");
         $votingperiod = VotingPeriod::getVotingPeriod(); // select only first if exists
-        if($votingperiod){
+        if ($votingperiod) {
             $votingperiod->start = $startdate;
             $votingperiod->end = $enddate;
-        }
-        else{
+        } else {
             $votingperiod = new VotingPeriod(([
                 'start' => $startdate,
                 'end' => $enddate,
@@ -142,30 +132,19 @@ class AdminController extends Controller
     public function endvotingperiod()
     {
         $votingperiod = VotingPeriod::getVotingPeriod();
-        if($votingperiod)
+        if ($votingperiod)
             $votingperiod->delete();
     }
 
     public function deleteteacher()
     {
-        /*if(!Gate::allows('admin')){
-            abort(403);
-        }*/
-        $faszom = request('teacherid');
-        $teacher = Teacher::find($faszom);
-        Log::debug($teacher);
-        $teacher->delete();
-
-        //Teacher::delete();
+        $teacher_id = request('teacherid');
+        Teacher::destroy($teacher_id);
     }
     // todo inspect this shit
     public function addteacher()
     {
-        /*if(!Gate::allows('admin')){
-            abort(403);
-        }*/
         $request = request();
-        //dd($teacher->teachername);
         $teacher = new Teacher([
             'name' => $request->teachername,
             'description' => $request->teacherdescription,
@@ -175,11 +154,8 @@ class AdminController extends Controller
     }
     public function modifyteacher()
     {
-        /*if(!Gate::allows('admin')){
-            abort(403);
-        }*/
         $request = request();
-        $current_teacher = Teacher::where('id',$request->teacherid)->firstorfail();
+        $current_teacher = Teacher::find($request->teacherid);
         $current_teacher->name = $request->teachername;
         $current_teacher->description = $request->teacherdescription;
         $current_teacher->save();
@@ -187,21 +163,13 @@ class AdminController extends Controller
     // //////////////////////////////////////////////////////////////////////////////// //
     public function deleteteacheryoung()
     {
-        /*if(!Gate::allows('admin')){
-            abort(403);
-        }*/
-        $request = request('teacherid');
-        $teacher = YoungTeacher::find($request);
-        $teacher->delete();
+        $teacher_id = request('teacherid');
+        YoungTeacher::destroy($teacher_id);
     }
     // todo inspect this shit
     public function addteacheryoung()
     {
-        /*if(!Gate::allows('admin')){
-            abort(403);
-        }*/
         $request = request();
-        //dd($teacher->teachername);
         $teacher = new YoungTeacher([
             'name' => $request->teachername,
             'description' => $request->teacherdescription,
@@ -211,40 +179,42 @@ class AdminController extends Controller
     }
     public function modifyteacheryoung()
     {
-        /*if(!Gate::allows('admin')){
-            abort(403);
-        }*/
         $request = request();
-        $current_teacher = YoungTeacher::where('id',$request->teacherid)->firstorfail();
+        $current_teacher = YoungTeacher::find($request->teacherid);
         $current_teacher->name = $request->teachername;
         $current_teacher->description = $request->teacherdescription;
         $current_teacher->save();
     }
-    public function countvotes(){
+    public function countvotes()
+    {
         return DB::table('votes')
-            ->join('teachers','votes.teacher_id','=','teachers.id')
-            ->select('teachers.name as name',DB::raw("count(votes.teacher_id) as count"))
+            ->join('teachers', 'votes.teacher_id', '=', 'teachers.id')
+            ->select('teachers.name as name', DB::raw("count(votes.teacher_id) as count"))
             ->groupBy('teachers.name')
             ->get();
     }
-    public function countvotesyoung(){
+    public function countvotesyoung()
+    {
         return DB::table('young_votes')
-            ->join('young_teachers','young_votes.teacher_id','=','young_teachers.id')
-            ->select('young_teachers.name as name',DB::raw("count(young_votes.teacher_id) as count"))
+            ->join('young_teachers', 'young_votes.teacher_id', '=', 'young_teachers.id')
+            ->select('young_teachers.name as name', DB::raw("count(young_votes.teacher_id) as count"))
             ->groupBy('young_teachers.name')
             ->get();
     }
-    public function countunique(){
+    public function countunique()
+    {
         $votes = Vote::select('user_id')->get();
         $youngvotes = YoungVote::select('user_id')->get();
         $cumultative = $votes->concat($youngvotes);
 
         return count(collect($cumultative)->unique('user_id')->all());
     }
-    public function deletevotes(){
+    public function deletevotes()
+    {
         Vote::truncate();
     }
-    public function deletevotesyoung(){
+    public function deletevotesyoung()
+    {
         YoungVote::truncate();
     }
 }

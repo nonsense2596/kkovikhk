@@ -24,7 +24,7 @@ class CallToVote extends Mailable
      *
      * @return void
      */
-    public function __construct($mailsubject,$mailbody,$displayName,$mailaddress,$unsubuuid)
+    public function __construct($mailsubject, $mailbody, $displayName, $mailaddress, $unsubuuid)
     {
         //
         $this->mailsubject = $mailsubject;
@@ -33,7 +33,7 @@ class CallToVote extends Mailable
         $this->mailaddress = $mailaddress;
         $this->unsubuuid = $unsubuuid;
 
-        $this->unsuburl = url('/unsubscribe/'.urlencode($this->mailaddress).'/'.$unsubuuid);
+        $this->unsuburl = url('/unsubscribe/' . urlencode($this->mailaddress) . '/' . $unsubuuid);
     }
 
     /**

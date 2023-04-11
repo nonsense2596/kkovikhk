@@ -307,13 +307,13 @@
 
         var data = new google.visualization.DataTable();
         data.addColumn('number', 'Day');
-        @if(!empty($teachers) && !is_null($asd))
+        @if(!empty($teachers) && !is_null($vote_distribution))
         @foreach($teachers as $teacher)
         data.addColumn('number','{{$teacher->name}}');
         @endforeach
         data.addRows([
             [0,  @for($i = 0; $i < $teachers->count(); $i++){!! "0.0," !!}@endfor], // TODO EZT IS DINAMIKUSRA
-            @foreach($asd as $key => $value)
+            @foreach($vote_distribution as $key => $value)
             [{{$key+1}},
             @foreach($value as $valu)
             {{$valu}},
@@ -346,13 +346,13 @@
 
         var data = new google.visualization.DataTable();
         data.addColumn('number', 'Day');
-        @if(!empty($teachers_young) && !is_null($asd2))
+        @if(!empty($teachers_young) && !is_null($young_vote_distribution))
         @foreach($teachers_young as $teacher)
         data.addColumn('number','{{$teacher->name}}');
         @endforeach
         data.addRows([
             [0,  @for($i = 0; $i < $teachers_young->count(); $i++){!! "0.0," !!}@endfor],    // TODO EZT IS DINAMIKUSRA
-                @foreach($asd2 as $key => $value)
+                @foreach($young_vote_distribution as $key => $value)
             [{{$key+1}},
                 @foreach($value as $valu)
                 {{$valu}},

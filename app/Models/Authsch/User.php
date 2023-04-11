@@ -4,7 +4,6 @@ namespace App\Models\Authsch;
 
 //use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Vote;
 use App\Models\YoungVote;
@@ -28,12 +27,10 @@ class User extends Authenticatable
 
     public function has_already_voted()
     {
-        return $this->hasMany(Vote::class)->count()>0;
+        return $this->hasMany(Vote::class)->count() > 0;
     }
     public function has_already_voted_young()
     {
-        return $this->hasMany(YoungVote::class)->count()>0;
+        return $this->hasMany(YoungVote::class)->count() > 0;
     }
-
-
 }
