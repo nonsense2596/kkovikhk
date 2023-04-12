@@ -36,7 +36,6 @@ class AdminController extends Controller
         }
     }
 
-    // todo gates to global function
     public function admin()
     {
         $current_user = Auth::user();

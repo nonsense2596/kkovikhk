@@ -34,17 +34,9 @@ class VoteController extends Controller
         $validated = $request->validate([
             'id' => 'required|array|between:1,3',
             'id.*' => 'required|numeric|exists:teachers,id',
-            'prio' => 'required|array|size:' . count($request->id),
+            'prio' => 'required|array|size:' . ($request->id != null ? count($request->id) : 0),
             'prio.*' => 'required|numeric|distinct|between:1,3',
         ]);
-
-        // TODO: maybe it could be just a simple a validation rule
-        // first pass: see if all of the presented ids are valid and are of a teacher's
-        foreach ($validated['id'] as $teacher_id) {
-            if (!Teacher::find($teacher_id)) {
-                return redirect('/vote');
-            }
-        }
 
         $ids_and_weights = array_map(null, $validated['id'], $validated['prio']);
 
@@ -84,7 +76,7 @@ class VoteController extends Controller
             abort(403, "Már szavaztál");
 
         $validated = $request->validate([
-            'id' => 'required',
+            'id' => 'required|numeric|exists:young_teachers,id',
         ]);
 
         $teacher_id = (int)$validated['id'];
