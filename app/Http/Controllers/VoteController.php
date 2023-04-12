@@ -25,7 +25,6 @@ class VoteController extends Controller
         return view('vote', compact('teachers'));
     }
 
-    // TODO: weighted voting + all three of the votes should be packed together in a POST request
     public function votepost(Request $request)
     {
         $current_user = Auth::user();
@@ -34,6 +33,7 @@ class VoteController extends Controller
 
         $validated = $request->validate([
             'id' => 'required|array|between:1,3',
+            'id.*' => 'required|numeric|exists:teachers,id',
             'prio' => 'required|array|size:' . count($request->id),
             'prio.*' => 'required|numeric|distinct|between:1,3',
         ]);

@@ -14,5 +14,4 @@ class Vote extends Model
         'teacher_id',
         'weight'
     ];
-
 }

@@ -81,6 +81,7 @@ class AdminController extends Controller
             }
         }
 
+
         $young_vote_distribution = [];
         foreach ($period as $day_index => $day) {
             foreach ($teachers_young as $teacher_index => $teacher) {
@@ -188,7 +189,7 @@ class AdminController extends Controller
     {
         return DB::table('votes')
             ->join('teachers', 'votes.teacher_id', '=', 'teachers.id')
-            ->select('teachers.name as name', DB::raw("count(votes.teacher_id) as count"))
+            ->select('teachers.name as name', DB::raw("sum(votes.weight) as count"))
             ->groupBy('teachers.name')
             ->get();
     }

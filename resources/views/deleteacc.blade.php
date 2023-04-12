@@ -23,10 +23,12 @@
                 <div class="col-lg-8 offset-lg-2 col-sm-10 offset-sm-1 col-md-8 offset-md-2">
                     <h1>Biztosan törölni szeretnéd a fiókodat?</h1>
                     <br><br>
-                        <form action="/deleteacc" method="POST" class="btn-group" role="group">
+                        <form action="/deleteacc" method="POST">
                             @csrf
-                            <button type="submit" class="btn btn-outline-danger">Igen</button>
-                            <a href="{{ url('/')}}" class="btn btn-outline-secondary">Nem</a>
+                            <div class="btn-group" role="group">
+                                <button type="submit" class="btn btn-outline-danger">Igen</button>
+                                <a href="{{ url('/')}}" class="btn btn-outline-secondary">Nem</a>
+                            </div>
                         </form>
                 </div>
             </div>

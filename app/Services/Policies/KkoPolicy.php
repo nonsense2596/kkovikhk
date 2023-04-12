@@ -43,6 +43,7 @@ class KkoPolicy extends Basic
                 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
                 'http://fonts.googleapis.com',
                 'https://fonts.gstatic.com',
+                'http://fonts.gstatic.com'
             ])
             ->addDirective(Directive::SCRIPT, [
                 Keyword::SELF,

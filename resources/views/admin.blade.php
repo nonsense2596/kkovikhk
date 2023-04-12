@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{url('/css/admin.css')}}">
 </head>
 <body>
+    
 <div class="container-fluid content">
     <div class="container">
         <div class="row">
@@ -284,8 +285,9 @@
 
         var data = google.visualization.arrayToDataTable([
             ['Name', 'Vote count'],
-                @foreach($votecountsyoung as $votecount)
-            ['{{$votecount->name}}',{{$votecount->count}}],
+
+            @foreach($votecountsyoung as $votecount)
+                ['{{$votecount->name}}',{{$votecount->count}}],
             @endforeach
         ]);
 
@@ -304,24 +306,21 @@
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
-
         var data = new google.visualization.DataTable();
         data.addColumn('number', 'Day');
         @if(!empty($teachers) && !is_null($vote_distribution))
-        @foreach($teachers as $teacher)
-        data.addColumn('number','{{$teacher->name}}');
-        @endforeach
-        data.addRows([
-            [0,  @for($i = 0; $i < $teachers->count(); $i++){!! "0.0," !!}@endfor], // TODO EZT IS DINAMIKUSRA
-            @foreach($vote_distribution as $key => $value)
-            [{{$key+1}},
-            @foreach($value as $valu)
-            {{$valu}},
+            @foreach($teachers as $teacher)
+                data.addColumn('number','{{$teacher->name}}');
             @endforeach
-            ],
-        @endforeach
+
+            data.addRows([
+                [0, @for($i = 0; $i < $teachers->count(); $i++){!! "0.0," !!}@endfor], // TODO EZT IS DINAMIKUSRA
+
+                @foreach($vote_distribution as $key => $value)
+                    [{{$key+1}}, @foreach($value as $valu) {{$valu}}, @endforeach],
+                @endforeach
+            ]);
         @endif
-        ]);
 
         var options = {
             chart: {
@@ -343,24 +342,22 @@
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
-
         var data = new google.visualization.DataTable();
         data.addColumn('number', 'Day');
         @if(!empty($teachers_young) && !is_null($young_vote_distribution))
-        @foreach($teachers_young as $teacher)
-        data.addColumn('number','{{$teacher->name}}');
-        @endforeach
-        data.addRows([
-            [0,  @for($i = 0; $i < $teachers_young->count(); $i++){!! "0.0," !!}@endfor],    // TODO EZT IS DINAMIKUSRA
+            @foreach($teachers_young as $teacher)
+                data.addColumn('number','{{$teacher->name}}');
+            @endforeach
+
+            data.addRows([
+                [0, @for($i = 0; $i < $teachers_young->count(); $i++){!! "0.0," !!}@endfor],    // TODO EZT IS DINAMIKUSRA
+                
                 @foreach($young_vote_distribution as $key => $value)
-            [{{$key+1}},
-                @foreach($value as $valu)
-                {{$valu}},
+                    [{{$key+1}}, @foreach($value as $valu) {{$valu}}, @endforeach],
                 @endforeach
-            ],
-        @endforeach
+            ]);
         @endif
-        ]);
+
 
         var options = {
             chart: {
