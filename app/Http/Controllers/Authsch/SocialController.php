@@ -2,14 +2,9 @@
 
 namespace App\Http\Controllers\Authsch;
 
-
-use Illuminate\Http\Request;
 use App\Models\Authsch\User;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Validator;
 use Socialite;
-use Exception;
 use Auth;
 use App\Http\Controllers\Controller as Controller;
 
@@ -78,7 +73,8 @@ class SocialController extends Controller
         }
         return $actualscope;
     }
-
+ 
+    // TODO: this does not belong here
     public function multi_implode($array, $glue)
     {
         if(is_null($array)){

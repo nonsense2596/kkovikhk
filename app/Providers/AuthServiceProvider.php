@@ -25,7 +25,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        // restricts the admin panel to admin users
         Gate::define('admin',function($user){
             return $user->isadmin;
         });

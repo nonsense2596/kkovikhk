@@ -12,6 +12,7 @@ class Vote extends Model
     protected $fillable = [
         'user_id',
         'teacher_id',
+        'weight'
     ];
 
 }

@@ -42,7 +42,6 @@ class AdminController extends Controller
         $current_user = Auth::user();
 
         $votecounts = $this->countvotes()->sortByDesc("count");
-
         $votenum = Vote::count();
 
         $votecountsyoung = $this->countvotesyoung()->sortByDesc("count");
