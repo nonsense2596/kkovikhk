@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller as Controller;
-use App\Mail\CallToVote;
 use App\Models\Teacher;
 use App\Models\YoungTeacher;
 use App\Models\Vote;
@@ -12,8 +11,8 @@ use DateInterval;
 use DatePeriod;
 use DateTime;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
 use App\Models\Authsch\User;
+use App\Jobs\SendEmail;
 
 use Auth;
 
@@ -28,17 +27,17 @@ class AdminController extends Controller
         $mailbody = request('mailbody');
 
         $users = User::where('reqmail', true)->get();
-        // TODO vannak queuek is a laravelben, hasznalni kene
+        
         foreach ($users as $user) {
-            usleep(100000);
-            Mail::to($user->mail)
-                ->send(new CallToVote($mailsubject, $mailbody, $user->displayName, $user->mail, $user->unsub));
+            SendEmail::dispatch($mailsubject, $mailbody, $user->displayName, $user->mail, $user->unsub);
         }
     }
 
     public function admin()
     {
         $current_user = Auth::user();
+
+        $subscriber_count = User::where('reqmail', true)->count();
 
         $votecounts = $this->countvotes()->sortByDesc("count");
         $votenum = Vote::count();
@@ -95,6 +94,7 @@ class AdminController extends Controller
 
         return view("admin", compact(
             'current_user',
+            'subscriber_count',
             'teachers',
             'teachers_young',
             'votingperiod',

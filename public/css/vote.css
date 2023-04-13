@@ -55,3 +55,39 @@ h3{
         margin: 5px;
     }
 }
+
+.wrapper {
+    display: grid;
+}
+  
+.non-overlay {
+    grid-area: 1 / 1;
+}
+
+.overlay {
+    display: none;
+    grid-area: 1 / 1;
+    color: white;
+    text-align: center;
+    backdrop-filter: blur(8px) brightness(80%);
+}
+/* 
+.overlay:after {
+    content: 'buzi';
+} */
+
+.first, .second, .third {
+    display: block;
+}
+
+.first:after {
+    content: 'Elsődleges preferencia';
+}
+
+.second:after {
+    content: 'Másdolagos preferencia';
+}
+
+.third:after {
+    content: 'Harmadlagos preferencia';
+}

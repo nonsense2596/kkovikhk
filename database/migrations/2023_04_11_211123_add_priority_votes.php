@@ -14,7 +14,7 @@ class AddPriorityVotes extends Migration
     public function up()
     {
         Schema::table('votes', function (Blueprint $table) {
-            $table->integer('weight');
+            $table->integer('weight')->default(1); // for compatibility reasons it defaults to 1
         });
     }
 

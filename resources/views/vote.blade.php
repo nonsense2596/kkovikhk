@@ -29,13 +29,16 @@
                 @foreach($teachers as $teacher)
                     <label>
                         <input type="checkbox" name="id[]" class="card-input-element d-none" value="{{$teacher->id}}">
-                        <div class="card d-flex flex-row justify-content-between">
-                            <div class="card-body my-card-header">
-                                {{$teacher->name}}
+                        <div class="wrapper">
+                            <div class="card d-flex flex-row justify-content-between non-overlay">
+                                <div class="card-body my-card-header">
+                                    {{$teacher->name}}
+                                </div>
+                                <div class="card-body">
+                                    {{$teacher->description}}
+                                </div>
                             </div>
-                            <div class="card-body">
-                                {{$teacher->description}}
-                            </div>
+                            <div class="overlay"></div>
                         </div>
                     </label>
                 @endforeach
@@ -51,9 +54,9 @@
     <script src="js/jquery-1.7.2.js"></script>
     <script>
         const priority_to_class = {
-            1: 'text-white bg-success',
-            2: 'text-white bg-info',
-            3: 'text-white bg-primary'
+            1: 'd-block first',
+            2: 'd-block second',
+            3: 'd-block third'
         };
 
         const MAX_PRIORITY = 3;
@@ -82,19 +85,19 @@
                     checks.push(this);
                     const priority = checks.length; // the updated length represents the new prio
                     $(`<input type="hidden" name="prio[]" value="${priority}">`).insertAfter($(this));
-                    $(this).siblings(".card").addClass(priority_to_class[priority]);
+                    $(this).siblings(".wrapper").children(".overlay").addClass(priority_to_class[priority]);
                 }
             } else {
                 const index = checks.findIndex((element) => element == this);
                 if (index != -1) { // again, it should never be -1
                     checks.splice(index, 1);
                     $(this).siblings('[type="hidden"]').remove();
-                    $(this).siblings(".card").removeClass(priority_to_class[index + 1]);
+                    $(this).siblings(".wrapper").children(".overlay").removeClass(priority_to_class[index + 1]);
                     for (let i = index; i < checks.length; i++) {
                         $(checks[i]).siblings('[type="hidden"]').val(parseInt($(checks[i]).siblings('[type="hidden"]').val()) - 1);
                         const previous_priority = i + 2;    // before the deletion zero-indexing + 1
                         const new_priority = i + 1;         // zero-indexing + 1
-                        $(checks[i]).siblings(".card").removeClass(priority_to_class[previous_priority]).addClass(priority_to_class[new_priority]);
+                        $(checks[i]).siblings(".wrapper").children(".overlay").removeClass(priority_to_class[previous_priority]).addClass(priority_to_class[new_priority]);
                     }
                 }
             }
