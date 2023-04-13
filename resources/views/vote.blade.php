@@ -75,6 +75,14 @@
             $("input:checkbox").not(":checked").attr("disabled", checkLimitReached());
         }
 
+        function getOverlayFromInputElement(element) {
+            return $(element).siblings(".wrapper").children(".overlay");
+        }
+
+        function getCardHeaderFromInputElement(element) {
+            return $(element).siblings(".wrapper").children(".card").children(".my-card-header");
+        }
+
         $("input:checkbox").click(function() {
             if (this.checked) {
                 if (checkLimitReached()) {
@@ -85,19 +93,42 @@
                     checks.push(this);
                     const priority = checks.length; // the updated length represents the new prio
                     $(`<input type="hidden" name="prio[]" value="${priority}">`).insertAfter($(this));
-                    $(this).siblings(".wrapper").children(".overlay").addClass(priority_to_class[priority]);
+                    getOverlayFromInputElement(this).addClass(priority_to_class[priority]);
+                    getOverlayFromInputElement(this).text(`${priority}. ${getCardHeaderFromInputElement(this).text()}`);
+
+                    if (checkLimitReached()) {
+                        for (let i = 0; i < checks.length; i++) {
+                            getOverlayFromInputElement(checks[i]).addClass("maximum_selection_reached");
+                        }
+                    }
                 }
             } else {
                 const index = checks.findIndex((element) => element == this);
                 if (index != -1) { // again, it should never be -1
+                    // remove element from array of checked boxes
                     checks.splice(index, 1);
+                    // remove the corresponding hidden input containing its priority
                     $(this).siblings('[type="hidden"]').remove();
-                    $(this).siblings(".wrapper").children(".overlay").removeClass(priority_to_class[index + 1]);
+
+                    // remove the actual DOM element's class selector (overlay)
+                    getOverlayFromInputElement(this).removeClass(priority_to_class[index + 1]);
+                    // update all subsequent elements' properties (both JS and DOM related)
                     for (let i = index; i < checks.length; i++) {
                         $(checks[i]).siblings('[type="hidden"]').val(parseInt($(checks[i]).siblings('[type="hidden"]').val()) - 1);
+
                         const previous_priority = i + 2;    // before the deletion zero-indexing + 1
                         const new_priority = i + 1;         // zero-indexing + 1
-                        $(checks[i]).siblings(".wrapper").children(".overlay").removeClass(priority_to_class[previous_priority]).addClass(priority_to_class[new_priority]);
+                        getOverlayFromInputElement(checks[i])
+                            .removeClass(priority_to_class[previous_priority])
+                            .addClass(priority_to_class[new_priority]);
+                        getOverlayFromInputElement(checks[i]).text(`${new_priority}. ${getCardHeaderFromInputElement(checks[i]).text()}`);
+                    }
+
+                    if (checks.length == MAX_PRIORITY - 1) {
+                        getOverlayFromInputElement(this).removeClass("maximum_selection_reached");
+                        for (let i = 0; i < checks.length; i++) {
+                            getOverlayFromInputElement(checks[i]).removeClass("maximum_selection_reached");
+                        }
                     }
                 }
             }

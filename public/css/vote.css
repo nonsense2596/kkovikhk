@@ -69,25 +69,18 @@ h3{
     grid-area: 1 / 1;
     color: white;
     text-align: center;
-    backdrop-filter: blur(8px) brightness(80%);
+    backdrop-filter: blur(5px) brightness(80%);
+    border: 2px solid #3490dc;
+    border-radius: 3px;
 }
-/* 
-.overlay:after {
-    content: 'buzi';
-} */
 
 .first, .second, .third {
     display: block;
+    font-size: 32px;
+    font-weight: bold;
 }
 
-.first:after {
-    content: 'Elsődleges preferencia';
-}
-
-.second:after {
-    content: 'Másdolagos preferencia';
-}
-
-.third:after {
-    content: 'Harmadlagos preferencia';
+.maximum_selection_reached {
+    border: 2px solid #38c172;
+    border-radius: 3px;
 }

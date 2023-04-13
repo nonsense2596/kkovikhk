@@ -407,7 +407,6 @@
             data: {_token:"{{csrf_token()}}", startdate, enddate},
             url: '/setvotingperiod',
             success: function(result){
-                // todo modal maybe???
                 window.location.reload();
             }
         });
