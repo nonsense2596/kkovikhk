@@ -34,7 +34,7 @@
                                 <div class="card-body my-card-header">
                                     {{$teacher->name}}
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body kurwa">
                                     {{$teacher->description}}
                                 </div>
                             </div>
