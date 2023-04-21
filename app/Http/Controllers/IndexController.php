@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\VotingPeriod;
-use Illuminate\Http\Request;
 use App\Models\Authsch\User;
 use App\Http\Controllers\Controller as Controller;
 
@@ -16,7 +15,9 @@ class IndexController extends Controller
     {
         $current_user = Auth::user();
         $isvotingperiod = VotingPeriod::isVotingPeriod();
-        return view("index",compact('current_user','isvotingperiod'));
+        $already_voted = $current_user != null ? $current_user->has_already_voted() : null;
+        $already_voted_young = $current_user != null ? $current_user->has_already_voted_young() : null;
+        return view("index",compact('current_user','isvotingperiod', 'already_voted','already_voted_young'));
     }
     public function voteselect()
     {

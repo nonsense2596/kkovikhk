@@ -34,7 +34,7 @@
                                 <div class="card-body my-card-header">
                                     {{$teacher->name}}
                                 </div>
-                                <div class="card-body kurwa">
+                                <div class="card-body normalize">
                                     {{$teacher->description}}
                                 </div>
                             </div>
@@ -54,9 +54,9 @@
     <script src="js/jquery-1.7.2.js"></script>
     <script>
         const priority_to_class = {
-            1: 'd-block first',
-            2: 'd-block second',
-            3: 'd-block third'
+            1: 'd-flex first',
+            2: 'd-flex second',
+            3: 'd-flex third'
         };
 
         const MAX_PRIORITY = 3;

@@ -62,8 +62,6 @@ class KkoPolicy extends Basic
                 'https://www.gstatic.com',
                 'https://www.gstatic.com/charts/50/loader.js',
                 'https://www.gstatic.com/charts/loader.js',
-                'http://fonts.googleapis.com',
-                'https://fonts.gstatic.com',
             ])
             ->addDirective(Directive::STYLE, [
                 Keyword::SELF,

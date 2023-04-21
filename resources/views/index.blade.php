@@ -25,10 +25,13 @@
                     <div class="row">
                         <div class="col-lg-12 col-12">
                             @auth
-                                <h5>Már be vagy jelentkezve</h5>
                                 <br>
                                 @if($isvotingperiod)
-                                    <a href="{{ url('/voteselect') }}" class="btn btn-primary col-lg-12 col-12">Tovább a szavazáshoz</a>
+                                    @if($already_voted && $already_voted_young) <!-- WORKING AREA -->
+                                        <h5 class="text-secondary">Már szavaztál.</h5>
+                                    @else
+                                        <a href="{{ url('/voteselect') }}" class="btn btn-primary col-lg-12 col-12">Tovább a szavazáshoz</a>
+                                    @endif
                                 @else
                                     <a href="#" class="btn btn-secondary col-lg-12 col-12 disabled" aria-disabled="true">Jelenleg nincs szavazási időszak</a>
                                 @endif
