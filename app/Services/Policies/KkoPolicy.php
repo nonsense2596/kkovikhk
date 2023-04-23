@@ -4,7 +4,6 @@ namespace App\Services\Policies;
 
 use Spatie\Csp\Directive;
 use Spatie\Csp\Keyword;
-use Spatie\Csp\Value;
 use Spatie\Csp\Policies\Basic;
 
 class KkoPolicy extends Basic
@@ -48,7 +47,6 @@ class KkoPolicy extends Basic
             ->addDirective(Directive::SCRIPT, [
                 Keyword::SELF,
                 Keyword::UNSAFE_INLINE,
-                'www.google.com',
                 'localhost:8000',
                 'http://localhost:8000',
                 'https://kko.vik.hk',
@@ -66,7 +64,6 @@ class KkoPolicy extends Basic
             ->addDirective(Directive::STYLE, [
                 Keyword::SELF,
                 Keyword::UNSAFE_INLINE,
-                'www.google.com',
                 'localhost:8000',
                 'http://localhost:8000',
                 'https://kko.vik.hk',
@@ -81,7 +78,6 @@ class KkoPolicy extends Basic
             ->addDirective(Directive::STYLE_ELEM,[
                 Keyword::SELF,
                 Keyword::UNSAFE_INLINE,
-                'www.google.com',
                 'localhost:8000',
                 'http://localhost:8000',
                 'https://kko.vik.hk',

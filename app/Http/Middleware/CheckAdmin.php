@@ -18,7 +18,7 @@ class CheckAdmin
     public function handle(Request $request, Closure $next)
     {
         $current_user = Auth::user();
-        if($current_user->isadmin)
+        if ($current_user->isadmin)
             return $next($request);
         else
             return redirect()->back();

@@ -17,9 +17,9 @@ class IsVotingPeriod
      */
     public function handle(Request $request, Closure $next)
     {
-        if(VotingPeriod::isVotingPeriod())
+        if (VotingPeriod::isVotingPeriod())
             return $next($request);
-        abort(403,'Jelenleg nincs szavazási időszak');
+        abort(403, 'Jelenleg nincs szavazási időszak');
         //else return redirect('/');
     }
 }

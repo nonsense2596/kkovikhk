@@ -27,7 +27,7 @@ class AdminController extends Controller
         $mailbody = request('mailbody');
 
         $users = User::where('reqmail', true)->get();
-        
+
         foreach ($users as $user) {
             SendEmail::dispatch($mailsubject, $mailbody, $user->displayName, $user->mail, $user->unsub);
         }

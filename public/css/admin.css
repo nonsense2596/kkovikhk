@@ -1,35 +1,39 @@
-body{
-    background-color:rgba(52,58,64,0.03);
+body {
+    background-color: rgba(52, 58, 64, 0.03);
 }
-.content{
-    margin-top:30px;
+
+.content {
+    margin-top: 30px;
 }
-.chartwrapper{
+
+.chartwrapper {
     /*overflow-x: hidden;*/
     /*overflow-y: hidden;*/
-    height:500px;
+    height: 500px;
 }
 
-#piechart{
+#piechart {
     align-content: center;
     position: absolute;
-    margin-left:auto;
+    margin-left: auto;
     margin-right: auto;
-    height:400px;
-    width:100%;
+    height: 400px;
+    width: 100%;
 }
 
-#piechartyoung{
+#piechartyoung {
     align-content: center;
     position: absolute;
-    margin-left:auto;
+    margin-left: auto;
     margin-right: auto;
-    height:400px;
-    width:100%;
+    height: 400px;
+    width: 100%;
 }
-.footer-spacer{
-    height:70px;
+
+.footer-spacer {
+    height: 70px;
 }
-#countdowntimer{
+
+#countdowntimer {
     font-weight: bold;
 }

@@ -24,8 +24,8 @@
                         <input type="date" class="form-control mr-2" id="startdate" name="startdate" value="{{$votingperiod->start}}">
                         <input type="date" class="form-control mr-2" id="enddate" name="enddate" value="{{$votingperiod->end}}">
                         <div class="mt-1 mr-3">
-                            <button type="button" class="btn btn-success" onClick="setVotingPeriod()">S</button>
-                            <button type="button" class="btn btn-danger" onClick="endVotingPeriod()">X</button>
+                            <button type="button" class="btn btn-success" onClick="setVotingPeriod()"><i class="fa fa-check" aria-hidden="true"></i></button>
+                            <button type="button" class="btn btn-danger" onClick="endVotingPeriod()"><i class="fa fa-times" aria-hidden="true"></i></button>
                         </div>
                         @if(($votingperiod->start==null && $votingperiod->end==null) || (date('Y-m-d')<$votingperiod->start || date('Y-m-d')>$votingperiod->end))
                             <span>A rendszer jelenleg <b><u>nem</u></b> fogad szavazatokat</span>
@@ -50,8 +50,8 @@
                         <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12 col-md-2" id="name{{$teacher->id}}" value="{{$teacher->name}}">
                         <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12 col-md-8" id="description{{$teacher->id}}" value="{{$teacher->description}}">
                         <div class="div mr-0 mr-md-2 mt-1">
-                            <button type="button" class="btn btn-primary" data-index="{{$teacher->id}}" onClick="modifyTeacher(this)">M</button>
-                            <button type="button" class="btn btn-danger" data-index="{{$teacher->id}}" onClick="deleteTeacher(this)">X</button>
+                            <button type="button" class="btn btn-primary" data-index="{{$teacher->id}}" onClick="modifyTeacher(this)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                            <button type="button" class="btn btn-danger" data-index="{{$teacher->id}}" onClick="deleteTeacher(this)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                         </div>
                     </form>
                 @endforeach
@@ -63,7 +63,7 @@
                     <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12 col-md-2" id="newname" size="15" placeholder="Új név hozzáadása...">
                     <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12 col-md-8" id="newdescription" size="60" placeholder="Új indoklás hozzáadása...">
                     <div class="div mr-0 mr-md-2 mt-1">
-                        <button type="button" class="btn btn-success mr-2" onClick="addTeacher()">A</button>
+                        <button type="button" class="btn btn-success mr-2" onClick="addTeacher()"><i class="fa fa-plus" aria-hidden="true"></i></button>
                     </div>
                 </form>
             </div>
@@ -78,8 +78,8 @@
                             <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12 col-md-2" id="name{{$teacher_young->id}}young" value="{{$teacher_young->name}}">
                             <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12 col-md-8" id="description{{$teacher_young->id}}young" value="{{$teacher_young->description}}">
                             <div class="div mr-0 mr-md-2 mt-1">
-                                <button type="button" class="btn btn-primary" data-index="{{$teacher_young->id}}" onClick="modifyTeacherYoung(this)">M</button>
-                                <button type="button" class="btn btn-danger" data-index="{{$teacher_young->id}}" onClick="deleteTeacherYoung(this)">X</button>
+                                <button type="button" class="btn btn-primary" data-index="{{$teacher_young->id}}" onClick="modifyTeacherYoung(this)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                <button type="button" class="btn btn-danger" data-index="{{$teacher_young->id}}" onClick="deleteTeacherYoung(this)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                             </div>
                     </form>
                 @endforeach
@@ -91,7 +91,7 @@
                     <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12 col-md-2" id="newnameyoung" placeholder="Új név hozzáadása...">
                     <input type="text" class="form-control mr-0 mr-md-2 mt-1 col-12 col-md-8" id="newdescriptionyoung"  placeholder="Új indoklás hozzáadása...">
                     <div class="div mr-0 mr-md-2 mt-1">
-                        <button type="button" class="btn btn-success mr-2" onClick="addTeacherYoung()">A</button>
+                        <button type="button" class="btn btn-success mr-2" onClick="addTeacherYoung()"><i class="fa fa-plus" aria-hidden="true"></i></button>
                     </div>
                 </form>
             </div>

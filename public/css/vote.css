@@ -1,5 +1,5 @@
-body{
-    margin-top:30px;
+body {
+    margin-top: 30px;
 }
 
 label {
@@ -30,28 +30,31 @@ label {
     transition: border .3s;
 }
 
-.my-card-header{
+.my-card-header {
     background-color: #f6f6f6;
     min-width: 8rem;
     color: #2074b3;
 }
 
-h1{
+h1 {
     color: #2074b3;
 }
-h3{
+
+h3 {
     color: #2481c7;
 }
-.btn{
+
+.btn {
     margin-top: 10px;
     width: 100%;
 }
 
 @media only screen and (max-width: 900px) {
-    .card{
+    .card {
         margin: 5px;
     }
-    .btn{
+
+    .btn {
         margin: 5px;
     }
 }
@@ -59,7 +62,7 @@ h3{
 .wrapper {
     position: relative;
 }
-  
+
 .non-overlay {
     border: 2px solid transparent;
     border-radius: 4px;
@@ -82,7 +85,9 @@ h3{
     border-radius: 3px;
 }
 
-.first, .second, .third {
+.first,
+.second,
+.third {
     display: block;
     font-size: 32px;
     font-weight: bold;
