@@ -1,20 +1,21 @@
 a {
     display: block;
 }
-a:hover{
+
+a:hover {
     text-decoration: none;
 }
 
-#img-left{
+#img-left {
     background-image: url('/imgs/omikk.jpg');
 }
 
-#img-right{
+#img-right {
     background-image: url('/imgs/bmeq.jpg');
 }
 
-.alreadyvoted{
-    color: rgba(255,255,255,0.4);
+.alreadyvoted {
+    color: rgba(255, 255, 255, 0.4);
 }
 
 .own-container {
@@ -62,27 +63,26 @@ a:hover{
 
 .img-box:hover .img-title {
     opacity: 1;
-    background-color: rgba(0,0,0,0.9);
-}
-
-.asd{
-
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 @media only screen and (max-width: 900px) {
     .img-box {
         width: 100%;
     }
+
     .own-container {
         display: inline-block;
         width: 100%;
         height: 100%;
         overflow: hidden;
     }
+
     .img-box {
         height: 50%;
         opacity: 1;
     }
+
     .img-title {
         opacity: 1;
     }
